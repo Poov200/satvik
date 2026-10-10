@@ -1434,6 +1434,10 @@
             font-size: 23px;
         }
 
+        .free-delivery {
+            color: var(--green) !important;
+        }
+
         .checkout-button {
             width: 100%;
 
@@ -2768,9 +2772,9 @@
 
                 <ul>
 
-                    <li>📞 +91 98765 43210</li>
-                    <li>✉️ hello@Satvikfoods.com</li>
-                    <li>📍 Tamil Nadu, India</li>
+                    <li>📞 +91 7200095988</li>
+                    <li>✉️ satvikfoods@gmail.com</li>
+                    <li>📍 Velechery,Tamil Nadu, India</li>
 
                 </ul>
 
@@ -2914,17 +2918,28 @@
         <div class="cart-footer" ng-if="cart.length > 0">
 
             <div class="cart-total">
-
-                <span>
-                    Total
-                </span>
-
-                <strong>
-                    ₹@{{ getCartTotal() }}
-                </strong>
-
+                <span>Subtotal</span>
+                <strong style="font-size:15px;">₹@{{ getCartSubtotal() | number:2 }}</strong>
             </div>
 
+            <div class="cart-total">
+                <span>Delivery Charges</span>
+                <strong style="font-size:15px;"
+                        ng-class="{'free-delivery': getDeliveryCharge() === 0}">
+                    <span ng-if="getDeliveryCharge() > 0">₹@{{ getDeliveryCharge() }}</span>
+                    <span ng-if="getDeliveryCharge() === 0">FREE</span>
+                </strong>
+            </div>
+
+            <p style="font-size:11px;color:#6e776f;margin:-4px 0 14px;"
+               ng-if="getDeliveryCharge() > 0">
+                Add products worth ₹@{{ (1000 - getCartSubtotal()) | number:2 }} more for free delivery.
+            </p>
+
+            <div class="cart-total">
+                <span><strong style="font-size:14px;">Grand Total</strong></span>
+                <strong>₹@{{ getCartTotal() | number:2 }}</strong>
+            </div>
 
             <button class="checkout-button" type="button" ng-click="openCheckout()">
                 Proceed to Checkout →
@@ -3059,10 +3074,12 @@
 
             <div class="form-group">
                 <label>Payment Method</label>
-                <select ng-model="customer.payment">
-                    <option value="COD">Cash on Delivery</option>
-                    <option value="UPI">UPI Payment</option>
+                <select ng-model="customer.payment" disabled>
+                    <option value="UPI">Online Payment (UPI)</option>
                 </select>
+                <small style="display:block;margin-top:6px;color:#6e776f;">
+                    Online payment only. Pay using a UPI app or scan the QR code.
+                </small>
             </div>
 
             <div style="background:#f4f8f3;border-radius:13px;padding:15px;margin:18px 0;">
@@ -3071,9 +3088,22 @@
                     <strong>@{{ getCartCount() }}</strong>
                 </div>
 
-                <div style="display:flex;justify-content:space-between;margin-top:8px;color:#246b45;">
-                    <strong>Order Total</strong>
-                    <strong>₹@{{ getCartTotal() }}</strong>
+                <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:13px;">
+                    <span>Subtotal</span>
+                    <strong>₹@{{ getCartSubtotal() | number:2 }}</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:13px;">
+                    <span>Delivery Charges</span>
+                    <strong>
+                        <span ng-if="getDeliveryCharge() > 0">₹@{{ getDeliveryCharge() }}</span>
+                        <span ng-if="getDeliveryCharge() === 0" style="color:#246b45;">FREE</span>
+                    </strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid #dce7de;color:#246b45;">
+                    <strong>Grand Total</strong>
+                    <strong>₹@{{ getCartTotal() | number:2 }}</strong>
                 </div>
             </div>
 
@@ -3199,7 +3229,7 @@
                 </p>
 
                 <p ng-if="createdOrder.payment_method === 'COD'">
-                    Your Cash on Delivery order has been received.
+                    Your order has been received. Please complete your online payment.
                 </p>
 
                 <button class="checkout-button"
@@ -3250,7 +3280,7 @@
 
         app.controller(
             'ShopController',
-            function($scope, $interval) {
+            function($scope, $interval, $http) {
 
 
                 /* =================================================
@@ -3299,936 +3329,19 @@
                    35 PRODUCTS
                 ========================================================= */
 
-                $scope.products = [
+                $scope.products = [];
 
-                    /* =========================================================
-                       1. HOMEMADE HEALTH DRINKS
-                    ========================================================= */
+$http.get('/api/products')
+    .then(function(response) {
 
-                    {
-                        id: 1,
-                        name: 'ABC Malt',
-                        category: 'Health Drinks',
-                        weight: '200g',
-                        price: 1,
+        $scope.products = response.data;
 
-                        variants: [{
-                            weight: '200g',
-                            price: 1
-                        }],
+    })
+    .catch(function(error) {
 
-                        rating: 4.8,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/abcmalt.png') }}",
+        console.error('Failed to load products:', error);
 
-                        description: 'Ingredients: Please refer to the product label for the complete ingredient list. Homemade ABC Malt prepared for nutritious everyday consumption.'
-                    },
-
-                    {
-                        id: 2,
-                        name: 'Badam Drink Mix',
-                        category: 'Health Drinks',
-                        weight: '200g',
-                        price: 3,
-
-                        variants: [{
-                            weight: '200g',
-                            price: 3
-                        }],
-
-                        rating: 4.9,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/badam.png') }}",
-
-                        description: 'Ingredients: Almond-based drink mix. Please refer to the product label for the complete ingredient list and allergen information.'
-                    },
-
-                    {
-                        id: 3,
-                        name: 'Makhana Health Mix',
-                        category: 'Health Drinks',
-                        weight: '200g',
-                        price: 300,
-
-                        variants: [{
-                            weight: '200g',
-                            price: 300
-                        }],
-
-                        rating: 4.7,
-                        badge: 'Healthy',
-                        image: "{{ asset('img/products/makhana.png') }}",
-
-                        description: 'Ingredients: Makhana-based health mix. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 4,
-                        name: 'Carrot Drink Mix',
-                        category: 'Health Drinks',
-                        weight: '200g',
-                        price: 300,
-
-                        variants: [{
-                            weight: '200g',
-                            price: 300
-                        }],
-
-                        rating: 4.8,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/carrot.png') }}",
-
-                        description: 'Ingredients: Carrot-based drink mix. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 10,
-                        name: 'Protein Health Mix',
-                        category: 'Health Mixes',
-                        weight: '500g',
-                        price: 300,
-
-                        variants: [{
-                                weight: '500g',
-                                price: 300
-                            },
-                            {
-                                weight: '1kg',
-                                price: 600
-                            }
-                        ],
-
-                        rating: 4.7,
-                        badge: 'Protein',
-                        image: "{{ asset('img/products/protinmix.png') }}",
-
-                        description: 'Ingredients: Protein Health Mix. Please refer to the product label for the complete ingredient list, nutritional information and allergen information.'
-                    },
-
-
-                    /* =========================================================
-                       2. ADDITIONAL BATTER
-                    ========================================================= */
-
-                    {
-                        id: 5,
-                        name: 'Adai Dosai Batter',
-                        category: 'Batter',
-                        weight: '500g',
-                        price: 105,
-
-                        variants: [{
-                                weight: '500g',
-                                price: 105
-                            },
-                            {
-                                weight: '1kg',
-                                price: 195
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Fresh',
-                        image: "{{ asset('img/products/adaidosa.png') }}",
-
-                        description: 'Ingredients: Homemade Adai Dosai Batter. Please refer to the product label for the complete ingredient list. Freshly prepared and available on pre-booking.'
-                    },
-
-                    {
-                        id: 6,
-                        name: 'Pesaratu Batter',
-                        category: 'Batter',
-                        weight: '500g',
-                        price: 160,
-
-                        variants: [{
-                                weight: '500g',
-                                price: 160
-                            },
-                            {
-                                weight: '1kg',
-                                price: 320
-                            }
-                        ],
-
-                        rating: 4.7,
-                        badge: 'Fresh',
-                        image: "{{ asset('img/products/pesaratu.png') }}",
-
-                        description: 'Ingredients: Homemade Pesaratu Batter. Please refer to the product label for the complete ingredient list. Freshly prepared and available on pre-booking.'
-                    },
-
-                    {
-                        id: 7,
-                        name: 'Multi Grain Batter',
-                        category: 'Batter',
-                        weight: '500g',
-                        price: 95,
-
-                        variants: [{
-                                weight: '500g',
-                                price: 95
-                            },
-                            {
-                                weight: '1kg',
-                                price: 190
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Healthy',
-                        image: "{{ asset('img/products/multigrain.png') }}",
-
-                        description: 'Ingredients: Multi-grain batter. Please refer to the product label for the complete ingredient list. Freshly prepared and available on pre-booking.'
-                    },
-
-
-                    /* =========================================================
-                       3. HEALTH MIXES
-                    ========================================================= */
-
-                    {
-                        id: 8,
-                        name: 'Arisi Kanji Mix',
-                        category: 'Health Mixes',
-                        weight: '500g',
-                        price: 160,
-
-                        variants: [{
-                                weight: '500g',
-                                price: 160
-                            },
-                            {
-                                weight: '1kg',
-                                price: 320
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Healthy',
-                        image: "{{ asset('img/products/arisikanji.png') }}",
-
-                        description: 'Ingredients:  rice-based Kanji Mix. Please refer to the product label for the complete ingredient list.'
-                    },
-
-
-
-
-
-
-                    /* =========================================================
-                       4. PODI & PREMIX
-                    ========================================================= */
-
-                    {
-                        id: 11,
-                        name: 'Garam Masala Podi',
-                        category: 'Podi & Premix',
-                        weight: '250g',
-                        price: 150,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 150
-                            },
-                            {
-                                weight: '500g',
-                                price: 275
-                            },
-                            {
-                                weight: '1kg',
-                                price: 550
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/garam-masala.png') }}",
-
-                        description: 'Ingredients: Homemade curry masala spice blend. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 12,
-                        name: 'Sambar Podi',
-                        category: 'Podi & Premix',
-                        weight: '250g',
-                        price: 160,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 160
-                            },
-                            {
-                                weight: '500g',
-                                price: 320
-                            },
-                            {
-                                weight: '1kg',
-                                price: 600
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/sambarpodi.png') }}",
-
-                        description: 'Ingredients: Homemade Sambar spice blend. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 13,
-                        name: 'Rasam Podi',
-                        category: 'Podi & Premix',
-                        weight: '250g',
-                        price: 220,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 220
-                            },
-                            {
-                                weight: '500g',
-                                price: 430
-                            },
-                            {
-                                weight: '1kg',
-                                price: 850
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/rasampodi.png') }}",
-
-                        description: 'Ingredients: Homemade Rasam spice blend. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 14,
-                        name: 'Vathakuzhambu Premix Podi',
-                        category: 'Podi & Premix',
-                        weight: '250g',
-                        price: 150,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 150
-                            },
-                            {
-                                weight: '500g',
-                                price: 300
-                            },
-                            {
-                                weight: '1kg',
-                                price: 600
-                            }
-                        ],
-
-                        rating: 4.7,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/vathakulambu.png') }}",
-
-                        description: 'Ingredients: Homemade Vathakuzhambu Premix Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-
-                    /* =========================================================
-                       5. THOKKU & CHUTNEY
-                    ========================================================= */
-
-                    {
-                        id: 15,
-                        name: 'Coriander Chutney',
-                        category: 'Thokku & Chutney',
-                        weight: '250g',
-                        price: 240,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 240
-                            },
-                            {
-                                weight: '500g',
-                                price: 450
-                            },
-                            {
-                                weight: '1kg',
-                                price: 900
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Fresh',
-                        image: "{{ asset('img/products/coriander-idli-podi.png') }}",
-
-                        description: 'Ingredients: Coriander-based homemade chutney. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 16,
-                        name: 'Murungai Keerai Thokku',
-                        category: 'Thokku & Chutney',
-                        weight: '250g',
-                        price: 190,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 190
-                            },
-                            {
-                                weight: '500g',
-                                price: 375
-                            },
-                            {
-                                weight: '1kg',
-                                price: 750
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/murungai-thokku.png') }}",
-
-                        description: 'Ingredients: Murungai Keerai-based homemade Thokku. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 17,
-                        name: 'Onion Thokku',
-                        category: 'Thokku & Chutney',
-                        weight: '250g',
-                        price: 190,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 190
-                            },
-                            {
-                                weight: '500g',
-                                price: 350
-                            },
-                            {
-                                weight: '1kg',
-                                price: 700
-                            }
-                        ],
-
-                        rating: 4.7,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/shallot-pickle.png') }}",
-
-                        description: 'Ingredients: Onion-based homemade Thokku. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 18,
-                        name: 'Pirandai Thokku',
-                        category: 'Thokku & Chutney',
-                        weight: '250g',
-                        price: 200,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 200
-                            },
-                            {
-                                weight: '500g',
-                                price: 400
-                            },
-                            {
-                                weight: '1kg',
-                                price: 800
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Traditional',
-                        image: "{{ asset('img/products/pirandai-thokku.png') }}",
-
-                        description: 'Ingredients: Pirandai-based homemade Thokku. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 19,
-                        name: 'Puthina, Kothamalli & Karuvepillai',
-                        category: 'Thokku & Chutney',
-                        weight: '250g',
-                        price: 165,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 165
-                            },
-                            {
-                                weight: '500g',
-                                price: 325
-                            },
-                            {
-                                weight: '1kg',
-                                price: 650
-                            }
-                        ],
-
-                        rating: 4.9,
-                        image: "{{ asset('img/products/.png') }}",
-
-                        description: 'Ingredients: Puthina (Mint), Kothamalli (Coriander) and Karuvepillai (Curry Leaves). Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 20,
-                        name: 'Vazhaipoo Thokku',
-                        category: 'Thokku & Chutney',
-                        weight: '250g',
-                        price: 190,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 190
-                            },
-                            {
-                                weight: '500g',
-                                price: 375
-                            },
-                            {
-                                weight: '1kg',
-                                price: 750
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/vazhaipoo-thokku.png') }}",
-
-                        description: 'Ingredients: Vazhaipoo (Banana Blossom)-based homemade Thokku. Please refer to the product label for the complete ingredient list.'
-                    },
-
-
-                    /* =========================================================
-                       6. IDLI PODI
-                    ========================================================= */
-
-                    {
-                        id: 21,
-                        name: 'Murungai Keerai Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 325,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 325
-                            },
-                            {
-                                weight: '500g',
-                                price: 650
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1300
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/murungai-idli-podi.png') }}",
-
-                        description: 'Ingredients: Murungai Keerai (Drumstick Leaves)-based Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 22,
-                        name: 'Vallarai Keerai Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 300,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 300
-                            },
-                            {
-                                weight: '500g',
-                                price: 600
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1200
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Healthy',
-                        image: "{{ asset('img/products/vallarai-idli-podi.png') }}",
-
-                        description: 'Ingredients: Vallarai Keerai-based homemade Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 23,
-                        name: 'Kollu Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 263,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 263
-                            },
-                            {
-                                weight: '500g',
-                                price: 526
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1052
-                            }
-                        ],
-
-                        rating: 4.7,
-                        badge: 'Traditional',
-                        image: "{{ asset('img/products/kollu-idli-podi.png') }}",
-
-                        description: 'Ingredients: Kollu (Horse Gram)-based Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 24,
-                        name: 'Mudakatha Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 238,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 238
-                            },
-                            {
-                                weight: '500g',
-                                price: 475
-                            },
-                            {
-                                weight: '1kg',
-                                price: 950
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Healthy',
-                        image: "{{ asset('img/products/mudakathan-idli-podi.png') }}",
-
-                        description: 'Ingredients: Mudakathan Keerai-based homemade Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 25,
-                        name: 'Curry Leaf Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 173,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 173
-                            },
-                            {
-                                weight: '500g',
-                                price: 345
-                            },
-                            {
-                                weight: '1kg',
-                                price: 690
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/curryleaf-idli-podi.png') }}",
-
-                        description: 'Ingredients: Curry Leaves-based homemade Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 26,
-                        name: 'Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 149,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 149
-                            },
-                            {
-                                weight: '500g',
-                                price: 298
-                            },
-                            {
-                                weight: '1kg',
-                                price: 596
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Best Seller',
-                        image: "{{ asset('img/products/idli-podi.png') }}",
-
-                        description: 'Ingredients: Traditional homemade Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 27,
-                        name: 'Pirandai Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 300,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 300
-                            },
-                            {
-                                weight: '500g',
-                                price: 600
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1200
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Traditional',
-                        image: "{{ asset('img/products/pirandai-idli-podi.png') }}",
-
-                        description: 'Ingredients: Pirandai-based homemade Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 28,
-                        name: 'Flax Seeds Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 243,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 243
-                            },
-                            {
-                                weight: '500g',
-                                price: 485
-                            },
-                            {
-                                weight: '1kg',
-                                price: 970
-                            }
-                        ],
-
-                        rating: 4.7,
-                        badge: 'Healthy',
-                        image: "{{ asset('img/products/flaxseed-idli-podi.png') }}",
-
-                        description: 'Ingredients: Flax Seeds-based homemade Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 29,
-                        name: 'Thuthuvallai Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 323,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 323
-                            },
-                            {
-                                weight: '500g',
-                                price: 646
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1292
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Traditional',
-                        image: "{{ asset('img/products/thuthuvali-idli-podi.png') }}",
-
-                        description: 'Ingredients: Thuthuvallai-based homemade Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 30,
-                        name: 'Ellu Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 423,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 423
-                            },
-                            {
-                                weight: '500g',
-                                price: 842
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1692
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/ellu-idli-podi.png') }}",
-
-                        description: 'Ingredients: Ellu (Sesame Seeds)-based homemade Idli Podi. Please refer to the product label for the complete ingredient list and allergen information.'
-                    },
-
-                    {
-                        id: 31,
-                        name: 'Nilakadalai Idli Podi (Peanuts)',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 250,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 250
-                            },
-                            {
-                                weight: '500g',
-                                price: 500
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1000
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/nilakadalai-idli-podi.png') }}",
-
-                        description: 'Ingredients: Nilakadalai (Peanuts)-based homemade Idli Podi. Please refer to the product label for the complete ingredient list and allergen information.'
-                    },
-
-                    {
-                        id: 32,
-                        name: 'Garlic Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 300,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 300
-                            },
-                            {
-                                weight: '500g',
-                                price: 600
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1200
-                            }
-                        ],
-
-                        rating: 4.7,
-                        badge: 'Homemade',
-                        image: "{{ asset('img/products/garlic-idli-podi.png') }}",
-                        description: 'Ingredients: Garlic-based homemade Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 33,
-                        name: 'Avaram Poo Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 275,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 275
-                            },
-                            {
-                                weight: '500g',
-                                price: 550
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1100
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Traditional',
-                        image: "{{ asset('img/products/avarampoo-idli-podi.png') }}",
-
-                        description: 'Ingredients: Avaram Poo-based homemade Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 34,
-                        name: 'Chana Dal Spicy Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 200,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 200
-                            },
-                            {
-                                weight: '500g',
-                                price: 400
-                            },
-                            {
-                                weight: '1kg',
-                                price: 800
-                            }
-                        ],
-
-                        rating: 4.8,
-                        badge: 'Spicy',
-                        image: "{{ asset('img/products/channadal-idli-podi.png') }}",
-
-                        description: 'Ingredients: Chana Dal-based spicy Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    },
-
-                    {
-                        id: 35,
-                        name: 'Kotthamalli Idli Podi',
-                        category: 'Idli Podi',
-                        weight: '250g',
-                        price: 347,
-
-                        variants: [{
-                                weight: '250g',
-                                price: 347
-                            },
-                            {
-                                weight: '500g',
-                                price: 693
-                            },
-                            {
-                                weight: '1kg',
-                                price: 1385
-                            }
-                        ],
-
-                        rating: 4.9,
-                        badge: 'Popular',
-                        image: "{{ asset('img/products/coriender-idli-podi.png') }}",
-
-                        description: 'Ingredients: Kotthamalli (Coriander)-based homemade Idli Podi. Please refer to the product label for the complete ingredient list.'
-                    }
-
-                ];
+    });
 
 
                 /* =========================================================
@@ -4285,7 +3398,7 @@
 
                     address: '',
 
-                    payment: 'COD'
+                    payment: 'UPI'
 
                 };
 
@@ -4497,26 +3610,29 @@
 
 
                 /* =================================================
-                   CART TOTAL
+                   CART SUBTOTAL + DELIVERY + GRAND TOTAL
                 ================================================= */
 
-                $scope.getCartTotal =
-                    function() {
+                $scope.getCartSubtotal = function() {
+                    return $scope.cart.reduce(function(total, item) {
+                        return total +
+                            (Number(item.price) * Number(item.quantity));
+                    }, 0);
+                };
 
-                        return $scope.cart.reduce(
-                            function(total, item) {
+                // Delivery is free only when the item subtotal is above ₹999.
+                // At ₹999 or below, delivery costs ₹69.
+                $scope.getDeliveryCharge = function() {
+                    return $scope.getCartSubtotal() > 999 ? 0 : 69;
+                };
 
-                                return total +
-                                    (
-                                        Number(item.price) *
-                                        Number(item.quantity)
-                                    );
+                $scope.getCartTotal = function() {
+                    if ($scope.cart.length === 0) {
+                        return 0;
+                    }
 
-                            },
-                            0
-                        );
-
-                    };
+                    return $scope.getCartSubtotal() + $scope.getDeliveryCharge();
+                };
 
 
                 /* =================================================
@@ -4790,6 +3906,8 @@
                             address: $scope.customer.address,
                             payment: $scope.customer.payment,
                             items: $scope.cart,
+                            subtotal: $scope.getCartSubtotal(),
+                            delivery_charge: $scope.getDeliveryCharge(),
                             total: $scope.getCartTotal()
                         };
 
@@ -4830,6 +3948,10 @@
                                     $scope.paymentOpen = true;
                                 } else {
                                     $scope.orderSuccess = true;
+
+                                    // Order was successfully created: clear the cart for COD.
+                                    $scope.cart = [];
+                                    localStorage.removeItem('Satvik_cart');
                                 }
                             });
                         })
