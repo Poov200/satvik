@@ -1592,19 +1592,15 @@
                                         </option>
 
                                         <option value="Sweets">
-                                            Sweets
+                                            Batter
                                         </option>
 
-                                        <option value="Snacks">
-                                            Snacks
+                                        <option value="Instant-Thokku">
+                                            Instant Thokku
                                         </option>
 
                                         <option value="Podi">
                                             Podi
-                                        </option>
-
-                                        <option value="Laddu">
-                                            Laddu
                                         </option>
 
                                         <option value="Other">
