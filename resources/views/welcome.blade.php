@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Satvik Foods | Organic & Natural Foods</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}">
 
     <meta name="description" content="Shop premium organic, natural and healthy food products from Satvik Foods.">
 
