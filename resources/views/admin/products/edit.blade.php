@@ -13,7 +13,6 @@
 
 
     <style>
-
         :root {
             --green: #1f7a45;
             --green-dark: #155b32;
@@ -93,7 +92,7 @@
             align-items: center;
 
             border-bottom:
-                1px solid rgba(255,255,255,.07);
+                1px solid rgba(255, 255, 255, .07);
         }
 
 
@@ -218,7 +217,7 @@
             flex-shrink: 0;
 
             border-top:
-                1px solid rgba(255,255,255,.06);
+                1px solid rgba(255, 255, 255, .06);
         }
 
 
@@ -290,7 +289,7 @@
 
             background: transparent;
 
-            border: 1px solid rgba(255,255,255,.08);
+            border: 1px solid rgba(255, 255, 255, .08);
 
             border-radius: 8px;
 
@@ -438,8 +437,7 @@
             display: grid;
 
             grid-template-columns:
-                minmax(0,1fr)
-                360px;
+                minmax(0, 1fr) 360px;
 
             gap: 22px;
         }
@@ -461,8 +459,7 @@
             overflow: hidden;
 
             box-shadow:
-                0 4px 20px
-                rgba(16,37,26,.06);
+                0 4px 20px rgba(16, 37, 26, .06);
         }
 
 
@@ -559,8 +556,7 @@
             border-color: var(--green);
 
             box-shadow:
-                0 0 0 3px
-                rgba(31,122,69,.08);
+                0 0 0 3px rgba(31, 122, 69, .08);
         }
 
 
@@ -777,13 +773,13 @@
         }
 
 
-        .switch input:checked + .slider {
+        .switch input:checked+.slider {
 
             background: var(--green);
         }
 
 
-        .switch input:checked + .slider:before {
+        .switch input:checked+.slider:before {
 
             transform:
                 translateX(20px);
@@ -892,7 +888,6 @@
             }
 
         }
-
     </style>
 
 </head>
@@ -901,109 +896,25 @@
 <body>
 
 
-<!-- SIDEBAR -->
+    <!-- SIDEBAR -->
 
-<aside class="sidebar">
-
-
-    <div class="brand">
-
-        <div class="brand-icon">
-            S
-        </div>
-
-        <div class="brand-text">
-
-            <strong>
-                Satvik Foods
-            </strong>
-
-            <span>
-                Admin Panel
-            </span>
-
-        </div>
-
-    </div>
+    <aside class="sidebar">
 
 
-    <nav class="side-nav">
+        <div class="brand">
 
-
-        <div class="nav-title">
-            Main
-        </div>
-
-
-        <a
-            href="{{ route('admin.orders') }}"
-            class="nav-link"
-        >
-            <span class="nav-icon">📊</span>
-            Dashboard
-        </a>
-
-
-        <div class="nav-title">
-            Store
-        </div>
-
-
-        <a
-            href="{{ route('admin.orders') }}"
-            class="nav-link"
-        >
-            <span class="nav-icon">🛒</span>
-            Orders
-        </a>
-
-
-        <a
-            href="{{ route('admin.products') }}"
-            class="nav-link active"
-        >
-            <span class="nav-icon">📦</span>
-            Products
-        </a>
-
-
-        <div class="nav-title">
-            Management
-        </div>
-
-
-        <a href="#" class="nav-link">
-            <span class="nav-icon">👥</span>
-            Customers
-        </a>
-
-
-        <a href="#" class="nav-link">
-            <span class="nav-icon">📈</span>
-            Reports
-        </a>
-
-
-    </nav>
-
-
-    <div class="side-footer">
-
-
-        <div class="admin-user">
-
-            <div class="admin-avatar">
-                A
+            <div class="brand-icon">
+                S
             </div>
 
-            <div class="admin-info">
+            <div class="brand-text">
 
                 <strong>
-                    Administrator
+                    Satvik Foods
                 </strong>
 
                 <span>
-                    {{ session('admin_email') }}
+                    Admin Panel
                 </span>
 
             </div>
@@ -1011,727 +922,682 @@
         </div>
 
 
-        <form
-            method="POST"
-            action="{{ route('admin.logout') }}"
-        >
-
-            @csrf
-
-            <button class="logout-btn">
-                ↪ Logout
-            </button>
-
-        </form>
+        <nav class="side-nav">
 
 
-    </div>
-
-</aside>
-
-
-
-<!-- MAIN -->
-
-<main class="main">
-
-
-    <header class="topbar">
-
-        <div>
-
-            <div class="top-title">
-                Products
+            <div class="nav-title">
+                Main
             </div>
 
-            <div class="top-subtitle">
-                Manage Satvik Foods products
-            </div>
 
-        </div>
-
-    </header>
-
-
-
-    <div class="page">
-
-
-        <!-- BREADCRUMB -->
-
-        <div class="breadcrumb">
-
-            <a href="{{ route('admin.orders') }}">
+            <a href="{{ route('admin.orders') }}" class="nav-link">
+                <span class="nav-icon">📊</span>
                 Dashboard
             </a>
 
-            <span>›</span>
 
-            <a href="{{ route('admin.products') }}">
+            <div class="nav-title">
+                Store
+            </div>
+
+
+            <a href="{{ route('admin.orders') }}" class="nav-link">
+                <span class="nav-icon">🛒</span>
+                Orders
+            </a>
+
+
+            <a href="{{ route('admin.products') }}" class="nav-link active">
+                <span class="nav-icon">📦</span>
                 Products
             </a>
 
-            <span>›</span>
 
-            <strong>
-                Edit Product
-            </strong>
+            <div class="nav-title">
+                Management
+            </div>
+
+
+            <a href="#" class="nav-link">
+                <span class="nav-icon">👥</span>
+                Customers
+            </a>
+
+
+            <a href="#" class="nav-link">
+                <span class="nav-icon">📈</span>
+                Reports
+            </a>
+
+
+        </nav>
+
+
+        <div class="side-footer">
+
+
+            <div class="admin-user">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div class="admin-info">
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <span>
+                        {{ session('admin_email') }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <form method="POST" action="{{ route('admin.logout') }}">
+
+                @csrf
+
+                <button class="logout-btn">
+                    ↪ Logout
+                </button>
+
+            </form>
+
 
         </div>
 
+    </aside>
 
 
-        <!-- HEADER -->
 
-        <div class="page-header">
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <header class="topbar">
 
             <div>
 
-                <h1>
-                    Edit Product
-                </h1>
+                <div class="top-title">
+                    Products
+                </div>
 
-                <p>
-                    Update product information and availability.
-                </p>
+                <div class="top-subtitle">
+                    Manage Satvik Foods products
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <div class="page">
+
+
+            <!-- BREADCRUMB -->
+
+            <div class="breadcrumb">
+
+                <a href="{{ route('admin.orders') }}">
+                    Dashboard
+                </a>
+
+                <span>›</span>
+
+                <a href="{{ route('admin.products') }}">
+                    Products
+                </a>
+
+                <span>›</span>
+
+                <strong>
+                    Edit Product
+                </strong>
 
             </div>
 
 
-            <a
-                href="{{ route('admin.products') }}"
-                class="back-btn"
-            >
-                ← Back to Products
-            </a>
+
+            <!-- HEADER -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>
+                        Edit Product
+                    </h1>
+
+                    <p>
+                        Update product information and availability.
+                    </p>
+
+                </div>
+
+
+                <a href="{{ route('admin.products') }}" class="back-btn">
+                    ← Back to Products
+                </a>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form method="POST" action="{{ route('admin.products.update', $product->id) }}"
+                enctype="multipart/form-data">
+
+                @csrf
+
+                @method('PUT')
+
+
+                <div class="form-grid">
+
+
+                    <!-- LEFT -->
+
+                    <div>
+
+
+                        <!-- BASIC -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <div class="card-title">
+                                    Basic Information
+                                </div>
+
+                                <div class="card-description">
+                                    Update product details
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-body">
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Product Name *
+                                    </label>
+
+                                    <input type="text" name="name" value="{{ old('name', $product->name) }}"
+                                        required>
+
+                                </div>
+
+
+                                <div class="form-row">
+
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Category *
+                                        </label>
+
+                                        <select name="category" required>
+
+                                            @foreach (['Health Drinks', 'Batter', 'Health Mixes', 'Podi & Premix', 'Thokku & Chutney', 'Idli Podi', 'Sweets', 'Snacks', 'Laddu', 'Other'] as $category)
+                                                <option value="{{ $category }}" @selected(old('category', $product->category) === $category)>
+                                                    {{ $category }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Weight
+                                        </label>
+
+                                        <input type="text" name="weight"
+                                            value="{{ old('weight', $product->weight) }}" placeholder="200g">
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-row">
+
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Price *
+                                        </label>
+
+                                        <input type="number" name="price" step="0.01" min="0"
+                                            value="{{ old('price', $product->price) }}" required>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Rating
+                                        </label>
+
+                                        <input type="number" name="rating" step="0.1" min="0"
+                                            max="5" value="{{ old('rating', $product->rating) }}">
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Badge
+                                    </label>
+
+                                    <input type="text" name="badge" value="{{ old('badge', $product->badge) }}"
+                                        placeholder="Popular">
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <div class="card-title">
+                                    Product Description
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-body">
+
+                                <textarea name="description" placeholder="Product description...">{{ old('description', $product->description) }}</textarea>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- VARIANTS -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <div class="card-title">
+                                    Product Variants
+                                </div>
+
+                                <div class="card-description">
+                                    Manage different weights and prices
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-body">
+
+
+                                <div id="variantList">
+
+
+                                    @php
+
+                                        $variants = $product->variants ?? [];
+
+                                        if (is_string($variants)) {
+                                            $variants = json_decode($variants, true) ?? [];
+                                        }
+
+                                    @endphp
+
+
+                                    @forelse($variants as $variant)
+                                        <div class="variant-row">
+
+
+                                            <div class="form-group">
+
+                                                <label>
+                                                    Weight
+                                                </label>
+
+                                                <input type="text" class="variant-weight"
+                                                    value="{{ $variant['weight'] ?? '' }}">
+
+                                            </div>
+
+
+                                            <div class="form-group">
+
+                                                <label>
+                                                    Price
+                                                </label>
+
+                                                <input type="number" step="0.01" class="variant-price"
+                                                    value="{{ $variant['price'] ?? '' }}">
+
+                                            </div>
+
+
+                                            <button type="button" class="remove-variant"
+                                                onclick="removeVariant(this)">
+                                                ×
+                                            </button>
+
+
+                                        </div>
+
+
+                                    @empty
+
+
+                                        <div class="variant-row">
+
+                                            <div class="form-group">
+
+                                                <label>
+                                                    Weight
+                                                </label>
+
+                                                <input type="text" class="variant-weight" placeholder="200g">
+
+                                            </div>
+
+
+                                            <div class="form-group">
+
+                                                <label>
+                                                    Price
+                                                </label>
+
+                                                <input type="number" class="variant-price" step="0.01"
+                                                    placeholder="250">
+
+                                            </div>
+
+
+                                            <button type="button" class="remove-variant"
+                                                onclick="removeVariant(this)">
+                                                ×
+                                            </button>
+
+                                        </div>
+                                    @endforelse
+
+
+                                </div>
+
+
+                                <button type="button" class="add-variant" onclick="addVariant()">
+                                    + Add Another Variant
+                                </button>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- RIGHT -->
+
+                    <div>
+
+
+                        <!-- IMAGE -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <div class="card-title">
+                                    Product Image
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-body">
+
+
+                                <div class="current-image">
+
+
+                                    @if ($product->image)
+                                        <img id="imagePreview" src="{{ asset($product->image) }}"
+                                            alt="{{ $product->name }}">
+                                    @else
+                                        <span>
+                                            📦 No Image
+                                        </span>
+                                    @endif
+
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Replace Image
+                                    </label>
+
+                                    <input class="file-input" type="file" name="image"
+                                        accept="image/png,image/jpeg,image/webp" onchange="previewImage(this)">
+
+                                    <small>
+                                        JPG, PNG or WEBP. Maximum 5MB.
+                                    </small>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- STATUS -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <div class="card-title">
+                                    Product Availability
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-body">
+
+
+                                <div class="status-box">
+
+
+                                    <div>
+
+                                        <div class="status-title">
+                                            Product Active
+                                        </div>
+
+                                        <div class="status-description">
+                                            Active products appear on the customer website.
+                                        </div>
+
+                                    </div>
+
+
+                                    <label class="switch">
+
+                                        <input type="checkbox" name="status" value="1"
+                                            @checked($product->status)>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="actions">
+
+                            <a href="{{ route('admin.products') }}" class="btn btn-cancel">
+                                Cancel
+                            </a>
+
+
+                            <button type="submit" class="btn btn-save">
+                                ✓ Update Product
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- HIDDEN VARIANTS -->
+
+                <input type="hidden" name="variants" id="variantsInput">
+
+
+            </form>
+
 
         </div>
 
+    </main>
 
 
-        <!-- FORM -->
 
-        <form
-            method="POST"
-            action="{{ route('admin.products.update', $product->id) }}"
-            enctype="multipart/form-data"
-        >
+    <script>
+        /*
+        |--------------------------------------------------------------------------
+        | IMAGE PREVIEW
+        |--------------------------------------------------------------------------
+        */
 
-            @csrf
+        function previewImage(input) {
+            if (!input.files || !input.files[0]) {
+                return;
+            }
 
-            @method('PUT')
+            const file = input.files[0];
 
+            if (file.size > 5 * 1024 * 1024) {
 
-            <div class="form-grid">
+                alert('Image must be less than 5MB.');
 
+                input.value = '';
 
-                <!-- LEFT -->
+                return;
+            }
 
-                <div>
+            const reader = new FileReader();
 
+            reader.onload = function(e) {
 
-                    <!-- BASIC -->
+                let preview =
+                    document.getElementById('imagePreview');
 
-                    <div class="card">
+                if (!preview) {
 
-                        <div class="card-header">
+                    preview =
+                        document.createElement('img');
 
-                            <div class="card-title">
-                                Basic Information
-                            </div>
+                    preview.id =
+                        'imagePreview';
 
-                            <div class="card-description">
-                                Update product details
-                            </div>
+                    preview.style.width =
+                        '100%';
 
-                        </div>
+                    preview.style.height =
+                        '100%';
 
+                    preview.style.objectFit =
+                        'contain';
 
-                        <div class="card-body">
+                    document
+                        .querySelector('.current-image')
+                        .innerHTML = '';
 
+                    document
+                        .querySelector('.current-image')
+                        .appendChild(preview);
+                }
 
-                            <div class="form-group">
+                preview.src =
+                    e.target.result;
+            };
 
-                                <label>
-                                    Product Name *
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value="{{ old('name', $product->name) }}"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="form-row">
-
-
-                                <div class="form-group">
-
-                                    <label>
-                                        Category *
-                                    </label>
-
-                                    <select
-                                        name="category"
-                                        required
-                                    >
-
-                                        @foreach([
-                                            'Health Drinks',
-                                            'Batter',
-                                            'Health Mixes',
-                                            'Podi & Premix',
-                                            'Thokku & Chutney',
-                                            'Idli Podi',
-                                            'Sweets',
-                                            'Snacks',
-                                            'Laddu',
-                                            'Other'
-                                        ] as $category)
-
-                                            <option
-                                                value="{{ $category }}"
-                                                @selected(
-                                                    old(
-                                                        'category',
-                                                        $product->category
-                                                    ) === $category
-                                                )
-                                            >
-                                                {{ $category }}
-                                            </option>
-
-                                        @endforeach
-
-                                    </select>
-
-                                </div>
-
-
-                                <div class="form-group">
-
-                                    <label>
-                                        Weight
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        name="weight"
-                                        value="{{ old('weight', $product->weight) }}"
-                                        placeholder="200g"
-                                    >
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="form-row">
-
-
-                                <div class="form-group">
-
-                                    <label>
-                                        Price *
-                                    </label>
-
-                                    <input
-                                        type="number"
-                                        name="price"
-                                        step="0.01"
-                                        min="0"
-                                        value="{{ old('price', $product->price) }}"
-                                        required
-                                    >
-
-                                </div>
-
-
-                                <div class="form-group">
-
-                                    <label>
-                                        Rating
-                                    </label>
-
-                                    <input
-                                        type="number"
-                                        name="rating"
-                                        step="0.1"
-                                        min="0"
-                                        max="5"
-                                        value="{{ old('rating', $product->rating) }}"
-                                    >
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label>
-                                    Badge
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="badge"
-                                    value="{{ old('badge', $product->badge) }}"
-                                    placeholder="Popular"
-                                >
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- DESCRIPTION -->
-
-                    <div class="card">
-
-                        <div class="card-header">
-
-                            <div class="card-title">
-                                Product Description
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <textarea
-                                name="description"
-                                placeholder="Product description..."
-                            >{{ old('description', $product->description) }}</textarea>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- VARIANTS -->
-
-                    <div class="card">
-
-                        <div class="card-header">
-
-                            <div class="card-title">
-                                Product Variants
-                            </div>
-
-                            <div class="card-description">
-                                Manage different weights and prices
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-
-                            <div id="variantList">
-
-
-                                @php
-
-                                    $variants = $product->variants ?? [];
-
-                                    if (is_string($variants)) {
-                                        $variants = json_decode(
-                                            $variants,
-                                            true
-                                        ) ?? [];
-                                    }
-
-                                @endphp
-
-
-                                @forelse($variants as $variant)
-
-
-                                    <div class="variant-row">
-
-
-                                        <div class="form-group">
-
-                                            <label>
-                                                Weight
-                                            </label>
-
-                                            <input
-                                                type="text"
-                                                class="variant-weight"
-                                                value="{{ $variant['weight'] ?? '' }}"
-                                            >
-
-                                        </div>
-
-
-                                        <div class="form-group">
-
-                                            <label>
-                                                Price
-                                            </label>
-
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                class="variant-price"
-                                                value="{{ $variant['price'] ?? '' }}"
-                                            >
-
-                                        </div>
-
-
-                                        <button
-                                            type="button"
-                                            class="remove-variant"
-                                            onclick="removeVariant(this)"
-                                        >
-                                            ×
-                                        </button>
-
-
-                                    </div>
-
-
-                                @empty
-
-
-                                    <div class="variant-row">
-
-                                        <div class="form-group">
-
-                                            <label>
-                                                Weight
-                                            </label>
-
-                                            <input
-                                                type="text"
-                                                class="variant-weight"
-                                                placeholder="200g"
-                                            >
-
-                                        </div>
-
-
-                                        <div class="form-group">
-
-                                            <label>
-                                                Price
-                                            </label>
-
-                                            <input
-                                                type="number"
-                                                class="variant-price"
-                                                step="0.01"
-                                                placeholder="250"
-                                            >
-
-                                        </div>
-
-
-                                        <button
-                                            type="button"
-                                            class="remove-variant"
-                                            onclick="removeVariant(this)"
-                                        >
-                                            ×
-                                        </button>
-
-                                    </div>
-
-                                @endforelse
-
-
-                            </div>
-
-
-                            <button
-                                type="button"
-                                class="add-variant"
-                                onclick="addVariant()"
-                            >
-                                + Add Another Variant
-                            </button>
-
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- RIGHT -->
-
-                <div>
-
-
-                    <!-- IMAGE -->
-
-                    <div class="card">
-
-                        <div class="card-header">
-
-                            <div class="card-title">
-                                Product Image
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-
-                            <div class="current-image">
-
-
-                                @if($product->image)
-
-                                    <img
-                                        id="imagePreview"
-                                        src="{{ asset($product->image) }}"
-                                        alt="{{ $product->name }}"
-                                    >
-
-                                @else
-
-                                    <span>
-                                        📦 No Image
-                                    </span>
-
-                                @endif
-
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label>
-                                    Replace Image
-                                </label>
-
-                                <input
-                                    class="file-input"
-                                    type="file"
-                                    name="image"
-                                    accept="image/png,image/jpeg,image/webp"
-                                    onchange="previewImage(this)"
-                                >
-
-                                <small>
-                                    JPG, PNG or WEBP. Maximum 5MB.
-                                </small>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- STATUS -->
-
-                    <div class="card">
-
-                        <div class="card-header">
-
-                            <div class="card-title">
-                                Product Availability
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-
-                            <div class="status-box">
-
-
-                                <div>
-
-                                    <div class="status-title">
-                                        Product Active
-                                    </div>
-
-                                    <div class="status-description">
-                                        Active products appear on the customer website.
-                                    </div>
-
-                                </div>
-
-
-                                <label class="switch">
-
-                                    <input
-                                        type="checkbox"
-                                        name="status"
-                                        value="1"
-                                        @checked($product->status)
-                                    >
-
-                                    <span class="slider"></span>
-
-                                </label>
-
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- ACTIONS -->
-
-                    <div class="actions">
-
-                        <a
-                            href="{{ route('admin.products') }}"
-                            class="btn btn-cancel"
-                        >
-                            Cancel
-                        </a>
-
-
-                        <button
-                            type="submit"
-                            class="btn btn-save"
-                        >
-                            ✓ Update Product
-                        </button>
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-            <!-- HIDDEN VARIANTS -->
-
-            <input
-                type="hidden"
-                name="variants"
-                id="variantsInput"
-            >
-
-
-        </form>
-
-
-    </div>
-
-</main>
-
-
-
-<script>
-
-/*
-|--------------------------------------------------------------------------
-| IMAGE PREVIEW
-|--------------------------------------------------------------------------
-*/
-
-function previewImage(input)
-{
-    if (!input.files || !input.files[0]) {
-        return;
-    }
-
-    const file = input.files[0];
-
-    if (file.size > 5 * 1024 * 1024) {
-
-        alert('Image must be less than 5MB.');
-
-        input.value = '';
-
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-
-        let preview =
-            document.getElementById('imagePreview');
-
-        if (!preview) {
-
-            preview =
-                document.createElement('img');
-
-            preview.id =
-                'imagePreview';
-
-            preview.style.width =
-                '100%';
-
-            preview.style.height =
-                '100%';
-
-            preview.style.objectFit =
-                'contain';
-
-            document
-                .querySelector('.current-image')
-                .innerHTML = '';
-
-            document
-                .querySelector('.current-image')
-                .appendChild(preview);
+            reader.readAsDataURL(file);
         }
 
-        preview.src =
-            e.target.result;
-    };
 
-    reader.readAsDataURL(file);
-}
+        /*
+        |--------------------------------------------------------------------------
+        | ADD VARIANT
+        |--------------------------------------------------------------------------
+        */
 
+        function addVariant() {
+            const list =
+                document.getElementById('variantList');
 
-/*
-|--------------------------------------------------------------------------
-| ADD VARIANT
-|--------------------------------------------------------------------------
-*/
+            const row =
+                document.createElement('div');
 
-function addVariant()
-{
-    const list =
-        document.getElementById('variantList');
+            row.className =
+                'variant-row';
 
-    const row =
-        document.createElement('div');
-
-    row.className =
-        'variant-row';
-
-    row.innerHTML = `
+            row.innerHTML = `
 
         <div class="form-group">
 
@@ -1770,90 +1636,72 @@ function addVariant()
 
     `;
 
-    list.appendChild(row);
-}
+            list.appendChild(row);
+        }
 
 
-/*
-|--------------------------------------------------------------------------
-| REMOVE VARIANT
-|--------------------------------------------------------------------------
-*/
+        /*
+        |--------------------------------------------------------------------------
+        | REMOVE VARIANT
+        |--------------------------------------------------------------------------
+        */
 
-function removeVariant(button)
-{
-    const rows =
-        document.querySelectorAll(
-            '.variant-row'
-        );
+        function removeVariant(button) {
+            const rows =
+                document.querySelectorAll(
+                    '.variant-row'
+                );
 
-    if (rows.length <= 1) {
+            if (rows.length <= 1) {
 
-        alert(
-            'At least one variant is required.'
-        );
+                alert(
+                    'At least one variant is required.'
+                );
 
-        return;
-    }
+                return;
+            }
 
-    button
-        .closest('.variant-row')
-        .remove();
-}
+            button
+                .closest('.variant-row')
+                .remove();
+        }
 
 
-/*
-|--------------------------------------------------------------------------
-| PREPARE VARIANTS BEFORE SUBMIT
-|--------------------------------------------------------------------------
-*/
+        /*
+        |--------------------------------------------------------------------------
+        | PREPARE VARIANTS BEFORE SUBMIT
+        |--------------------------------------------------------------------------
+        */
 
-document
-    .querySelector('form')
-    .addEventListener('submit', function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector(
+                'form[action*="/admin/products/"]'
+            );
 
-        const variants = [];
+            if (!form) return;
 
-        document
-            .querySelectorAll('.variant-row')
-            .forEach(function(row) {
+            form.addEventListener('submit', function() {
+                const variants = [];
 
-                const weight =
-                    row
-                    .querySelector('.variant-weight')
-                    .value
-                    .trim();
+                form.querySelectorAll('.variant-row').forEach(function(row) {
+                    const weight = row.querySelector('.variant-weight').value.trim();
+                    const price = row.querySelector('.variant-price').value.trim();
 
-                const price =
-                    row
-                    .querySelector('.variant-price')
-                    .value
-                    .trim();
+                    if (weight !== '' && price !== '' && !isNaN(Number(price))) {
+                        variants.push({
+                            weight: weight,
+                            price: Number(price)
+                        });
+                    }
+                });
 
-                if (weight && price) {
-
-                    variants.push({
-
-                        weight: weight,
-
-                        price: parseFloat(price)
-
-                    });
-
-                }
-
+                form.querySelector('#variantsInput').value =
+                    JSON.stringify(variants);
             });
-
-
-        document
-            .getElementById('variantsInput')
-            .value =
-                JSON.stringify(variants);
-
-    });
-
-</script>
+        });
+ </script>
 
 
 </body>
+
 </html>
