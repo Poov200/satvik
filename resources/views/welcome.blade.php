@@ -185,12 +185,12 @@
             width: 85px;
             height: 55px;
 
-            
+
 
             background:
-                
 
-            display: flex;
+
+                display: flex;
             align-items: center;
             justify-content: center;
 
@@ -198,7 +198,7 @@
 
             font-size: 23px;
 
-            
+
         }
 
         .logo-text strong {
@@ -1518,33 +1518,39 @@
                 translateY(0) scale(1);
         }
 
+        /* Modal layout */
         .modal-content {
-            display: grid;
-
-            grid-template-columns:
-                .8fr 1.2fr;
-        }
-
-        .modal-image {
-            min-height: 400px;
-
-            background:
-                linear-gradient(145deg,
-                    #edf7e9,
-                    #fff5e3);
-
             display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 140px;
+            height: 80vh;
+            max-height: 80vh;
+            overflow: hidden;
         }
 
-        .modal-info {
-            padding: 35px;
+        /* Fixed product image */
+        .modal-image {
+            flex: 0 0 50%;
+            height: 100%;
+            position: sticky;
+            top: 0;
+            overflow: hidden;
+        }
 
-            position: relative;
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Scrollable product details */
+        .modal-info {
+            flex: 1;
+            min-width: 0;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 24px;
+            box-sizing: border-box;
+            overscroll-behavior: contain;
         }
 
         .modal-info h2 {
@@ -2197,9 +2203,7 @@
                 width: 55px;
             }
 
-            .modal-content {
-                grid-template-columns: 1fr;
-            }
+
 
             .modal-image {
                 min-height: 230px;
@@ -2215,6 +2219,21 @@
                 grid-template-columns: 1fr;
             }
 
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                height: 85vh;
+                max-height: 85vh;
+            }
+
+            .modal-image {
+                flex-basis: 40%;
+            }
+
+            .modal-info {
+                padding: 16px;
+            }
         }
 
         /* =========================================
@@ -2920,26 +2939,24 @@
 
             <div class="cart-total">
                 <span>Subtotal</span>
-                <strong style="font-size:15px;">₹@{{ getCartSubtotal() | number:2 }}</strong>
+                <strong style="font-size:15px;">₹@{{ getCartSubtotal() | number: 2 }}</strong>
             </div>
 
             <div class="cart-total">
                 <span>Delivery Charges</span>
-                <strong style="font-size:15px;"
-                        ng-class="{'free-delivery': getDeliveryCharge() === 0}">
+                <strong style="font-size:15px;" ng-class="{'free-delivery': getDeliveryCharge() === 0}">
                     <span ng-if="getDeliveryCharge() > 0">₹@{{ getDeliveryCharge() }}</span>
                     <span ng-if="getDeliveryCharge() === 0">FREE</span>
                 </strong>
             </div>
 
-            <p style="font-size:11px;color:#6e776f;margin:-4px 0 14px;"
-               ng-if="getDeliveryCharge() > 0">
-                Add products worth ₹@{{ (1000 - getCartSubtotal()) | number:2 }} more for free delivery.
+            <p style="font-size:11px;color:#6e776f;margin:-4px 0 14px;" ng-if="getDeliveryCharge() > 0">
+                Add products worth ₹@{{ (1000 - getCartSubtotal()) | number: 2 }} more for free delivery.
             </p>
 
             <div class="cart-total">
                 <span><strong style="font-size:14px;">Grand Total</strong></span>
-                <strong>₹@{{ getCartTotal() | number:2 }}</strong>
+                <strong>₹@{{ getCartTotal() | number: 2 }}</strong>
             </div>
 
             <button class="checkout-button" type="button" ng-click="openCheckout()">
@@ -3031,17 +3048,11 @@
          CHECKOUT MODAL
     ========================================================== -->
 
-    <div class="modal"
-         ng-class="{active: checkoutOpen}"
-         ng-click="closeCheckout()">
+    <div class="modal" ng-class="{active: checkoutOpen}" ng-click="closeCheckout()">
 
-        <div class="checkout-box"
-             ng-click="$event.stopPropagation()">
+        <div class="checkout-box" ng-click="$event.stopPropagation()">
 
-            <button class="modal-close"
-                    type="button"
-                    ng-click="closeCheckout()"
-                    aria-label="Close checkout">
+            <button class="modal-close" type="button" ng-click="closeCheckout()" aria-label="Close checkout">
                 ×
             </button>
 
@@ -3051,26 +3062,18 @@
 
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text"
-                       ng-model="customer.name"
-                       placeholder="Enter your name"
-                       autocomplete="name">
+                <input type="text" ng-model="customer.name" placeholder="Enter your name" autocomplete="name">
             </div>
 
             <div class="form-group">
                 <label>Phone Number</label>
-                <input type="tel"
-                       ng-model="customer.phone"
-                       placeholder="Enter mobile number"
-                       maxlength="15"
-                       autocomplete="tel">
+                <input type="tel" ng-model="customer.phone" placeholder="Enter mobile number" maxlength="15"
+                    autocomplete="tel">
             </div>
 
             <div class="form-group">
                 <label>Delivery Address</label>
-                <textarea ng-model="customer.address"
-                          placeholder="Enter complete delivery address"
-                          rows="4"></textarea>
+                <textarea ng-model="customer.address" placeholder="Enter complete delivery address" rows="4"></textarea>
             </div>
 
             <div class="form-group">
@@ -3091,7 +3094,7 @@
 
                 <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:13px;">
                     <span>Subtotal</span>
-                    <strong>₹@{{ getCartSubtotal() | number:2 }}</strong>
+                    <strong>₹@{{ getCartSubtotal() | number: 2 }}</strong>
                 </div>
 
                 <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:13px;">
@@ -3102,16 +3105,14 @@
                     </strong>
                 </div>
 
-                <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid #dce7de;color:#246b45;">
+                <div
+                    style="display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid #dce7de;color:#246b45;">
                     <strong>Grand Total</strong>
-                    <strong>₹@{{ getCartTotal() | number:2 }}</strong>
+                    <strong>₹@{{ getCartTotal() | number: 2 }}</strong>
                 </div>
             </div>
 
-            <button class="checkout-button"
-                    type="button"
-                    ng-click="placeOrder()"
-                    ng-disabled="placingOrder">
+            <button class="checkout-button" type="button" ng-click="placeOrder()" ng-disabled="placingOrder">
                 <span ng-if="!placingOrder">Place Order →</span>
                 <span ng-if="placingOrder">Creating Order...</span>
             </button>
@@ -3124,17 +3125,11 @@
          UPI PAYMENT MODAL
     ========================================================== -->
 
-    <div class="modal"
-         ng-class="{active: paymentOpen}"
-         ng-click="closePayment()">
+    <div class="modal" ng-class="{active: paymentOpen}" ng-click="closePayment()">
 
-        <div class="checkout-box"
-             ng-click="$event.stopPropagation()">
+        <div class="checkout-box" ng-click="$event.stopPropagation()">
 
-            <button class="modal-close"
-                    type="button"
-                    ng-click="closePayment()"
-                    aria-label="Close payment">
+            <button class="modal-close" type="button" ng-click="closePayment()" aria-label="Close payment">
                 ×
             </button>
 
@@ -3149,9 +3144,8 @@
                 <strong>₹@{{ createdOrder.amount }}</strong>
             </div>
 
-            <a class="checkout-button"
-               ng-href="@{{ upiUrl }}"
-               style="display:block;text-align:center;text-decoration:none;">
+            <a class="checkout-button" ng-href="@{{ upiUrl }}"
+                style="display:block;text-align:center;text-decoration:none;">
                 📱 Pay with UPI App
             </a>
 
@@ -3161,9 +3155,7 @@
 
             <div class="payment-divider">OR</div>
 
-            <button class="checkout-button"
-                    type="button"
-                    ng-click="generateQr()">
+            <button class="checkout-button" type="button" ng-click="generateQr()">
                 📷 Show UPI QR
             </button>
 
@@ -3186,16 +3178,12 @@
 
             <div class="form-group">
                 <label>UPI Transaction ID / UTR</label>
-                <input type="text"
-                       ng-model="paymentData.utr"
-                       placeholder="Enter UTR / Transaction ID"
-                       autocomplete="off">
+                <input type="text" ng-model="paymentData.utr" placeholder="Enter UTR / Transaction ID"
+                    autocomplete="off">
             </div>
 
-            <button class="checkout-button"
-                    type="button"
-                    ng-click="submitPayment()"
-                    ng-disabled="submittingPayment">
+            <button class="checkout-button" type="button" ng-click="submitPayment()"
+                ng-disabled="submittingPayment">
                 <span ng-if="!submittingPayment">Submit Payment Details</span>
                 <span ng-if="submittingPayment">Submitting...</span>
             </button>
@@ -3208,8 +3196,7 @@
          ORDER SUCCESS MODAL
     ========================================================== -->
 
-    <div class="modal"
-         ng-class="{active: orderSuccess}">
+    <div class="modal" ng-class="{active: orderSuccess}">
 
         <div class="checkout-box">
 
@@ -3233,9 +3220,7 @@
                     Your order has been received. Please complete your online payment.
                 </p>
 
-                <button class="checkout-button"
-                        type="button"
-                        ng-click="closeSuccess()">
+                <button class="checkout-button" type="button" ng-click="closeSuccess()">
                     Continue Shopping
                 </button>
             </div>
@@ -3266,8 +3251,8 @@
 
     <script>
         /* =========================================================
-                                                           ANGULAR MODULE
-                                                        ========================================================== */
+                                                               ANGULAR MODULE
+                                                            ========================================================== */
 
         var app = angular.module(
             'SatvikApp',
@@ -3332,17 +3317,17 @@
 
                 $scope.products = [];
 
-$http.get('/api/products')
-    .then(function(response) {
+                $http.get('/api/products')
+                    .then(function(response) {
 
-        $scope.products = response.data;
+                        $scope.products = response.data;
 
-    })
-    .catch(function(error) {
+                    })
+                    .catch(function(error) {
 
-        console.error('Failed to load products:', error);
+                        console.error('Failed to load products:', error);
 
-    });
+                    });
 
 
                 /* =========================================================
@@ -3913,66 +3898,65 @@ $http.get('/api/products')
                         };
 
                         fetch(
-                            '{{ route("orders.store") }}',
-                            {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify(orderData)
-                            }
-                        )
-                        .then(function(response) {
-                            if (!response.ok) {
-                                return response.json().then(function(errorData) {
-                                    throw errorData;
-                                });
-                            }
-                            return response.json();
-                        })
-                        .then(function(data) {
-                            $scope.$apply(function() {
-                                $scope.placingOrder = false;
-
-                                if (!data.success) {
-                                    showToast('Unable to create order');
-                                    return;
+                                '{{ route('orders.store') }}', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    body: JSON.stringify(orderData)
                                 }
-
-                                $scope.createdOrder = data;
-                                $scope.checkoutOpen = false;
-
-                                if (data.payment_method === 'UPI') {
-                                    $scope.createUpiPayment();
-                                    $scope.paymentOpen = true;
-                                } else {
-                                    $scope.orderSuccess = true;
-
-                                    // Order was successfully created: clear the cart for COD.
-                                    $scope.cart = [];
-                                    localStorage.removeItem('Satvik_cart');
+                            )
+                            .then(function(response) {
+                                if (!response.ok) {
+                                    return response.json().then(function(errorData) {
+                                        throw errorData;
+                                    });
                                 }
-                            });
-                        })
-                        .catch(function(error) {
-                            console.error('Order error:', error);
+                                return response.json();
+                            })
+                            .then(function(data) {
+                                $scope.$apply(function() {
+                                    $scope.placingOrder = false;
 
-                            $scope.$apply(function() {
-                                $scope.placingOrder = false;
-
-                                if (error && error.errors) {
-                                    var firstError = Object.keys(error.errors)[0];
-                                    if (firstError && error.errors[firstError][0]) {
-                                        showToast(error.errors[firstError][0]);
+                                    if (!data.success) {
+                                        showToast('Unable to create order');
                                         return;
                                     }
-                                }
 
-                                showToast('Unable to create order. Please try again.');
+                                    $scope.createdOrder = data;
+                                    $scope.checkoutOpen = false;
+
+                                    if (data.payment_method === 'UPI') {
+                                        $scope.createUpiPayment();
+                                        $scope.paymentOpen = true;
+                                    } else {
+                                        $scope.orderSuccess = true;
+
+                                        // Order was successfully created: clear the cart for COD.
+                                        $scope.cart = [];
+                                        localStorage.removeItem('Satvik_cart');
+                                    }
+                                });
+                            })
+                            .catch(function(error) {
+                                console.error('Order error:', error);
+
+                                $scope.$apply(function() {
+                                    $scope.placingOrder = false;
+
+                                    if (error && error.errors) {
+                                        var firstError = Object.keys(error.errors)[0];
+                                        if (firstError && error.errors[firstError][0]) {
+                                            showToast(error.errors[firstError][0]);
+                                            return;
+                                        }
+                                    }
+
+                                    showToast('Unable to create order. Please try again.');
+                                });
                             });
-                        });
                     };
 
 
@@ -4023,8 +4007,7 @@ $http.get('/api/products')
                             }
 
                             new QRCode(
-                                container,
-                                {
+                                container, {
                                     text: $scope.upiUrl,
                                     width: 250,
                                     height: 250,
@@ -4054,56 +4037,54 @@ $http.get('/api/products')
                         $scope.submittingPayment = true;
 
                         fetch(
-                            '/orders/' +
-                            $scope.createdOrder.order_id +
-                            '/payment',
-                            {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify({
-                                    upi_transaction_id:
-                                        $scope.paymentData.utr.trim()
-                                })
-                            }
-                        )
-                        .then(function(response) {
-                            if (!response.ok) {
-                                return response.json().then(function(errorData) {
-                                    throw errorData;
-                                });
-                            }
-                            return response.json();
-                        })
-                        .then(function(data) {
-                            $scope.$apply(function() {
-                                $scope.submittingPayment = false;
-
-                                if (!data.success) {
-                                    showToast('Unable to submit payment details');
-                                    return;
+                                '/orders/' +
+                                $scope.createdOrder.order_id +
+                                '/payment', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    body: JSON.stringify({
+                                        upi_transaction_id: $scope.paymentData.utr.trim()
+                                    })
                                 }
+                            )
+                            .then(function(response) {
+                                if (!response.ok) {
+                                    return response.json().then(function(errorData) {
+                                        throw errorData;
+                                    });
+                                }
+                                return response.json();
+                            })
+                            .then(function(data) {
+                                $scope.$apply(function() {
+                                    $scope.submittingPayment = false;
 
-                                $scope.paymentOpen = false;
-                                $scope.orderSuccess = true;
-                                $scope.cart = [];
+                                    if (!data.success) {
+                                        showToast('Unable to submit payment details');
+                                        return;
+                                    }
 
-                                localStorage.removeItem('Satvik_cart');
+                                    $scope.paymentOpen = false;
+                                    $scope.orderSuccess = true;
+                                    $scope.cart = [];
 
-                                $scope.paymentData.utr = '';
+                                    localStorage.removeItem('Satvik_cart');
+
+                                    $scope.paymentData.utr = '';
+                                });
+                            })
+                            .catch(function(error) {
+                                console.error('Payment submission error:', error);
+
+                                $scope.$apply(function() {
+                                    $scope.submittingPayment = false;
+                                    showToast('Unable to submit payment details');
+                                });
                             });
-                        })
-                        .catch(function(error) {
-                            console.error('Payment submission error:', error);
-
-                            $scope.$apply(function() {
-                                $scope.submittingPayment = false;
-                                showToast('Unable to submit payment details');
-                            });
-                        });
                     };
 
 
