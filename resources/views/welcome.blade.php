@@ -2315,6 +2315,34 @@
                 width: 100%;
             }
         }
+
+
+        .hero-image-section {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .hero-banner {
+            width: 100%;
+            line-height: 0;
+        }
+
+        .hero-banner-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .hero-banner-image {
+                width: 100%;
+                height: auto;
+            }
+        }
     </style>
 </head>
 
@@ -2400,60 +2428,14 @@
          HERO
     ========================================================== -->
 
-    <section class="hero">
 
-        <div class="hero-inner">
-
-            <div class="hero-content">
-
-                <div class="hero-tag">
-                    🌱 100% Natural Goodness
-                </div>
-
-                <h1>
-                    Good food.
-                    <span>Good life.</span>
-                </h1>
-
-                <p>
-                    Discover carefully selected natural, organic and
-                    wholesome foods made for a healthier everyday lifestyle.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <button class="primary-button" type="button" ng-click="scrollToProducts()">
-                        Shop Now →
-                    </button>
-
-                    <button class="secondary-button" type="button" ng-click="openCategory('All')">
-                        Explore Foods
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-art">
-
-                <div class="floating-card one">
-                    🌿 100% Natural
-                </div>
-
-                <div class="hero-circle">
-                    🍯
-                </div>
-
-                <div class="floating-card two">
-                    ⭐ 4.8 Customer Rating
-                </div>
-
-            </div>
-
+    <section class="hero hero-image-section">
+        <div class="hero-banner">
+            <img src="{{ asset('img/satvik-hero-banner.png') }}" alt="Satvik Foods — Good food. Good life."
+                class="hero-banner-image">
         </div>
-
     </section>
+
 
 
     <!-- =========================================================
@@ -3251,8 +3233,8 @@
 
     <script>
         /* =========================================================
-                                                               ANGULAR MODULE
-                                                            ========================================================== */
+                                                                   ANGULAR MODULE
+                                                                ========================================================== */
 
         var app = angular.module(
             'SatvikApp',
