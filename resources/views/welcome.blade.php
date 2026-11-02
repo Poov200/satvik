@@ -10,10 +10,7 @@
 
     <meta name="description" content="Shop premium organic, natural and healthy food products from Satvik Foods.">
 
-    <!-- IMPORTANT:
-         No app.css
-         No external project CSS
-    -->
+
 
     <style>
         /* =========================================================
@@ -777,268 +774,191 @@
 
         .products-grid {
             display: grid;
-
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 18px;
-
             width: 100%;
         }
-
-
-        /* =========================================
-   PRODUCT CARD
-========================================= */
 
         .product-card {
             position: relative;
-
+            min-width: 0;
             background: #fff;
-
-            border-radius: 14px;
-
+            border: 1px solid #eeeeec;
+            border-radius: 5px;
             overflow: hidden;
-
-            border: 1px solid rgba(30, 80, 45, 0.10);
-
-            box-shadow: 0 5px 18px rgba(20, 50, 30, 0.06);
-
-            transition: all .25s ease;
+            box-shadow: none;
+            transition: box-shadow .22s ease, transform .22s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-
-            box-shadow: 0 12px 28px rgba(20, 60, 35, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
         }
-
-
-        /* =========================================
-   SMALL PRODUCT IMAGE
-========================================= */
 
         .product-image {
             position: relative;
-
             width: 100%;
-            height: 260px;
-
+            aspect-ratio: 1 / 1;
+            height: auto;
             overflow: hidden;
-
-            background: #f8f8f4;
-
+            background: #f7f7f6;
             display: flex;
             align-items: center;
             justify-content: center;
-
             cursor: pointer;
         }
 
         .product-photo {
             width: 100%;
             height: 100%;
-
             display: block;
-
             object-fit: contain;
             object-position: center;
-
             padding: 0;
-
-            transition: transform .4s ease;
+            transition: transform .35s ease;
         }
 
-        .product-card:hover .product-photo {
-            transform: scale(1.03);
-        }
-
-        /* =========================================
-   PRODUCT BADGE
-========================================= */
+        .product-card:hover .product-photo { transform: scale(1.025); }
 
         .product-tag {
             position: absolute;
-
             top: 9px;
             left: 9px;
-
             z-index: 5;
-
             padding: 5px 9px;
-
             border-radius: 20px;
-
             background: #176b3a;
             color: #fff;
-
             font-size: 9px;
             font-weight: 800;
-
             text-transform: uppercase;
-
             letter-spacing: .4px;
         }
 
-
-        /* =========================================
-   QUICK VIEW
-========================================= */
-
         .quick-view {
             position: absolute;
-
             top: 9px;
             right: 9px;
-
             z-index: 6;
-
             width: 32px;
             height: 32px;
-
-            border: none;
-
             border-radius: 50%;
-
             background: rgba(255, 255, 255, .95);
-
             color: #174d2b;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 14px;
-
-            cursor: pointer;
-
             box-shadow: 0 3px 10px rgba(0, 0, 0, .14);
-
             transition: .2s ease;
         }
 
-        .quick-view:hover {
-            transform: scale(1.08);
-        }
+        .quick-view:hover { transform: scale(1.08); }
 
-
-        /* =========================================
-   PRODUCT CONTENT
-========================================= */
-
-        .product-content {
-            padding: 12px;
-        }
-
-
-        .rating {
-            font-size: 11px;
-
-            color: #666;
-
-            margin-bottom: 4px;
-        }
-
-        .rating span {
-            color: #f5a623;
-        }
-
+        .product-content { padding: 10px 12px 12px; }
+        .product-rating { display: none; }
 
         .product-name {
-            font-size: 14px;
-
-            font-weight: 800;
-
-            line-height: 1.25;
-
-            color: #173c25;
-
-            margin-bottom: 4px;
-
-            min-height: 35px;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.35;
+            color: #151515;
+            margin: 0 0 7px;
+            min-height: 17px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-
-        .product-weight {
-            font-size: 11px;
-
-            color: #777;
-
-            margin-bottom: 10px;
-        }
-
-
-        /* =========================================
-   PRICE + BUTTON
-========================================= */
-
-        .product-bottom {
+        .product-price-line {
             display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
+            align-items: baseline;
             gap: 6px;
-        }
-
-
-        .price {
-            display: flex;
-
-            align-items: center;
-
-            gap: 5px;
-
             flex-wrap: wrap;
+            margin-bottom: 9px;
         }
 
-        .price strong {
-            font-size: 15px;
-
-            color: #145c31;
+        .product-price-line .price-current {
+            font-size: 13px;
+            color: #d71920;
+            font-weight: 600;
         }
 
-        .old-price {
-            font-size: 10px;
-
-            color: #999;
-
+        .product-price-line .old-price {
+            font-size: 11px;
+            color: #777;
             text-decoration: line-through;
         }
 
+        .product-variant-select {
+            display: block;
+            width: 100%;
+            height: 43px;
+            padding: 0 12px;
+            margin: 0 0 8px;
+            border: 1px solid #d2d2d2;
+            border-radius: 17px;
+            background: #fff;
+            color: #333;
+            font-size: 11px;
+            outline: none;
+        }
 
-        /* =========================================
-   ADD TO BAG
-========================================= */
+        .product-variant-select:focus { border-color: #999; }
+
+        .product-card-quantity {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 43px;
+            margin-bottom: 8px;
+            border: 1px solid #d0d0d0;
+            border-radius: 17px;
+            overflow: hidden;
+            background: #f7f7f7;
+        }
+
+        .product-card-quantity button {
+            width: 42px;
+            height: 100%;
+            flex: 0 0 42px;
+            background: transparent;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .product-card-quantity button:hover { background: #eaeaea; }
+        .product-card-quantity span { flex: 1; text-align: center; font-size: 12px; color: #222; }
 
         .add-button {
+            display: block;
+            width: 100%;
+            min-height: 43px;
             border: none;
-
-            background: #176b3a;
-
+            border-radius: 24px;
+            background: #050505;
             color: #fff;
-
-            padding: 7px 9px;
-
-            border-radius: 7px;
-
-            font-size: 10px;
-
+            padding: 10px 12px;
+            font-size: 12px;
             font-weight: 800;
-
             cursor: pointer;
-
             white-space: nowrap;
-
-            transition: .2s ease;
+            transition: background .2s ease, transform .2s ease;
         }
 
-        .add-button:hover {
-            background: #0f512a;
+        .add-button:hover { background: #246b45; transform: translateY(-1px); }
 
-            transform: translateY(-1px);
+        @media (max-width: 1100px) {
+            .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
         }
-
+        @media (max-width: 760px) {
+            .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+            .product-content { padding: 9px; }
+            .product-variant-select { height: 40px; padding: 0 8px; font-size: 10px; }
+            .product-card-quantity { height: 40px; }
+            .product-card-quantity button { width: 34px; flex-basis: 34px; }
+            .add-button { min-height: 40px; font-size: 11px; }
+        }
 
         /* =========================================================
            EMPTY PRODUCTS
@@ -1942,6 +1862,70 @@
         }
 
 
+
+        /* Header navigation menu */
+        .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        .main-nav a {
+            color: #284533;
+            font-size: 13px;
+            font-weight: 750;
+            white-space: nowrap;
+            padding: 10px 0;
+            position: relative;
+            transition: color .2s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--green);
+        }
+
+        .main-nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 3px;
+            width: 0;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--orange);
+            transition: width .2s ease;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 1100px) {
+            .header-inner { gap: 16px; }
+            .main-nav { gap: 13px; }
+            .main-nav a { font-size: 12px; }
+            .search-box { max-width: 300px; }
+        }
+
+        @media (max-width: 900px) {
+            .main-nav {
+                order: 4;
+                flex-basis: 100%;
+                justify-content: center;
+                gap: 24px;
+                padding: 4px 0 8px;
+                overflow-x: auto;
+            }
+            .search-box { order: 3; flex-basis: 100%; max-width: none; }
+        }
+
+        @media (max-width: 480px) {
+            .main-nav { justify-content: flex-start; gap: 22px; }
+            .main-nav a { font-size: 12px; }
+        }
+
         /* =========================================================
            MOBILE
         ========================================================= */
@@ -2343,6 +2327,228 @@
                 height: auto;
             }
         }
+
+
+        /* =========================================================
+           PREMIUM FOOD RETAIL NAVBAR & CATEGORY REDESIGN
+        ========================================================= */
+        .announcement {
+            background: #143d29;
+            padding: 9px 16px;
+            font-size: 12px;
+            letter-spacing: .25px;
+        }
+        .announcement span { color: #f5cf7a; }
+        .food-header {
+            background: rgba(255,255,255,.97);
+            box-shadow: 0 8px 28px rgba(27,61,39,.07);
+            border-bottom: 1px solid #e8eee7;
+        }
+        .food-header-main {
+            max-width: 1380px;
+            min-height: 86px;
+            padding: 12px 28px;
+            gap: 28px;
+        }
+        .food-logo { min-width: 220px; gap: 12px; }
+        .food-logo .logo-icon { width: 68px; height: 56px; flex-shrink: 0; }
+        .food-logo .logo-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .food-logo .logo-text strong { font-size: 22px; letter-spacing: -.6px; }
+        .food-logo .logo-text small { font-size: 9px; letter-spacing: 1.25px; }
+        .food-search { max-width: 570px; }
+        .food-search input {
+            height: 48px; padding-left: 20px; border: 1px solid #e0e8df;
+            background: #f7f9f5; border-radius: 13px; font-size: 13px;
+        }
+        .food-search input:focus { box-shadow: 0 0 0 4px rgba(36,107,69,.09); }
+        .food-search .search-icon { right: 17px; font-size: 26px; color: #31583e; }
+        .food-actions { gap: 14px; }
+        .header-help-link { display:flex; align-items:center; gap:9px; white-space:nowrap; }
+        .help-icon { display:grid; place-items:center; width:39px; height:39px; border-radius:12px; background:#edf5e9; color:#205d38; font-size:20px; }
+        .header-help-link small, .header-help-link strong { display:block; }
+        .header-help-link small { color:#7b857b; font-size:10px; margin-bottom:2px; }
+        .header-help-link strong { color:#24452f; font-size:12px; }
+        .food-cart-button { width:46px; height:46px; border-radius:13px; background:#1b633a; color:white; }
+        .food-cart-button:hover { background:#12472a; }
+        .food-nav-wrap { border-top:1px solid #f0f2ed; background:#fff; }
+        .food-nav {
+            max-width:1380px; min-height:48px; margin:0 auto; padding:0 28px;
+            display:flex; align-items:center; justify-content:flex-start; gap:30px;
+        }
+        .food-nav a { display:inline-flex; align-items:center; gap:7px; padding:15px 0 13px; color:#405347; font-size:12px; font-weight:800; }
+        .food-nav a:hover, .food-nav a.nav-home { color:#17663a; }
+        .food-nav a::after { bottom:5px; background:#e78a36; }
+        .nav-pill { background:#fff0dc; color:#b55b16; border-radius:5px; padding:3px 5px; font-size:8px; letter-spacing:.4px; }
+        .nav-promise { margin-left:auto; color:#7a897d; font-size:10px; white-space:nowrap; }
+        .category-heading-row { display:flex; align-items:end; justify-content:space-between; gap:16px; margin:32px 0 16px; }
+        .eyebrow-label { display:block; color:#bb702c; font-size:9px; font-weight:900; letter-spacing:1.8px; margin-bottom:6px; }
+        .category-heading-row h3 { color:#183f29; font-size:24px; letter-spacing:-.7px; line-height:1.15; }
+        .category-heading-row p { color:#788278; font-size:12px; margin-top:6px; }
+        .category-scroll-hint { color:#7b897d; font-size:10px; font-weight:700; padding-bottom:3px; white-space:nowrap; }
+        .food-categories { display:flex; gap:12px; overflow-x:auto; padding:3px 2px 16px; scroll-snap-type:x proximity; scrollbar-width:thin; scrollbar-color:#d8e3d6 transparent; }
+        .food-category-card { flex:0 0 158px; min-height:132px; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:7px; padding:15px 15px 14px; border:1px solid #e7ece4; border-radius:16px; background:linear-gradient(145deg,#fff 55%,#f7faf3); color:#244a30; white-space:normal; text-align:left; scroll-snap-align:start; box-shadow:0 4px 14px rgba(27,62,38,.035); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+        .food-category-card:hover { transform:translateY(-3px); border-color:#a9c7ad; box-shadow:0 9px 22px rgba(27,62,38,.09); }
+        .food-category-card.active { background:linear-gradient(145deg,#1e6b3e,#164b2d); color:#fff; border-color:#1e6b3e; box-shadow:0 8px 20px rgba(24,92,51,.17); }
+        .category-icon { display:grid; place-items:center; width:42px; height:42px; border-radius:13px; background:#edf5e8; color:#28633b; font-size:21px; }
+        .food-category-card.active .category-icon { background:rgba(255,255,255,.16); color:#fff; }
+        .category-label { display:block; font-size:12px; line-height:1.25; font-weight:850; }
+        .category-subtitle { display:block; font-size:10px; color:#859086; font-weight:500; }
+        .food-category-card.active .category-subtitle { color:rgba(255,255,255,.72); }
+        .anchor-target { display:block; position:relative; top:-150px; visibility:hidden; }
+        @media (max-width: 1100px) {
+            .food-header-main { gap:16px; padding-left:18px; padding-right:18px; }
+            .food-logo { min-width:190px; }
+            .food-nav { gap:22px; padding-left:20px; padding-right:20px; }
+            .nav-promise { display:none; }
+        }
+        @media (max-width: 900px) {
+            .food-header-main { flex-wrap:wrap; }
+            .food-logo { min-width:0; flex:1; }
+            .food-actions { margin-left:auto; }
+            .food-search { order:3; flex-basis:100%; max-width:none; }
+            .food-nav { overflow-x:auto; justify-content:flex-start; gap:24px; }
+            .food-nav a { flex-shrink:0; }
+            .header-help-link { display:none; }
+            .food-category-card { flex-basis:145px; }
+        }
+        @media (max-width: 600px) {
+            .announcement { font-size:10px; padding:8px 10px; }
+            .food-header-main { min-height:auto; padding:10px 14px 12px; gap:12px; }
+            .food-logo .logo-icon { width:48px; height:43px; }
+            .food-logo .logo-text strong { font-size:17px; }
+            .food-logo .logo-text small { font-size:8px; letter-spacing:.8px; }
+            .food-cart-button { width:41px; height:41px; }
+            .food-nav { min-height:44px; padding:0 14px; gap:22px; }
+            .food-nav a { font-size:11px; padding:14px 0 12px; }
+            .category-heading-row { margin-top:25px; }
+            .category-heading-row h3 { font-size:21px; }
+            .category-scroll-hint { font-size:9px; }
+            .food-category-card { flex-basis:132px; min-height:119px; padding:12px; }
+            .category-icon { width:37px; height:37px; font-size:19px; }
+            .category-label { font-size:11px; }
+            .category-subtitle { font-size:9px; }
+        }
+
+
+
+        /* Compact food-business navigation and footer */
+        .food-header-main { min-height:66px; gap:18px; padding:7px 22px; }
+        .food-logo { min-width:185px; gap:9px; }
+        .food-logo .logo-icon { width:52px; height:43px; }
+        .food-logo .logo-text strong { font-size:19px; }
+        .food-search { flex:0 1 360px; max-width:360px; }
+        .food-search input { height:40px; padding-left:15px; font-size:12px; border-radius:11px; }
+        .food-search .search-icon { font-size:21px; right:13px; }
+        .food-actions { gap:10px; }
+        .food-cart-button { width:40px; height:40px; border-radius:11px; }
+        .food-nav-wrap { order:0; border-top:0; border-bottom:1px solid #e8eee6; background:#f7faf5; }
+        .food-nav { min-height:37px; padding:0 22px; gap:25px; }
+        .food-nav a { padding:10px 0 9px; font-size:11px; }
+        .food-nav a::after { bottom:2px; }
+        .nav-promise { font-size:9px; }
+        .food-header-main { order:1; }
+        .food-header { display:flex; flex-direction:column; }
+        .satvik-footer { padding:42px 22px 18px; background:#122a1d; color:#fff; }
+        .satvik-footer-grid { max-width:1250px; margin:0 auto; grid-template-columns:1.35fr 1fr 1fr 1.1fr; gap:30px; }
+        .satvik-footer h3 { margin-bottom:12px; font-size:22px; }
+        .satvik-footer h4 { margin-bottom:13px; font-size:13px; color:#fff; }
+        .satvik-footer p, .satvik-footer li { color:rgba(255,255,255,.68); font-size:12px; line-height:1.8; }
+        .satvik-footer ul { padding:0; margin:0; }
+        .satvik-footer li { list-style:none; margin:5px 0; }
+        .satvik-footer a { color:inherit; transition:color .2s ease; }
+        .satvik-footer a:hover { color:#f4c77b; }
+        .footer-trust { margin-top:14px; }
+        .footer-legal { max-width:1250px; margin:24px auto 0; padding-top:15px; border-top:1px solid rgba(255,255,255,.10); }
+        .footer-legal h4 { margin-bottom:6px; }
+        .footer-legal p { font-size:11px; max-width:1050px; }
+        .footer-legal-links { display:flex; justify-content:center; flex-wrap:wrap; gap:16px; margin-bottom:12px; }
+        .copyright { max-width:1250px; margin:24px auto 0; padding-top:16px; line-height:1.7; }
+        .cart-fly-image { position:fixed; z-index:99999; pointer-events:none; object-fit:contain; border-radius:12px; background:#fff; box-shadow:0 10px 28px rgba(0,0,0,.22); transition:top .65s cubic-bezier(.2,.75,.25,1), left .65s cubic-bezier(.2,.75,.25,1), width .65s ease, height .65s ease, opacity .65s ease, transform .65s ease; }
+        .food-cart-button.cart-bounce { animation:cartBounce .55s ease; }
+        @keyframes cartBounce { 0%,100%{transform:scale(1)} 35%{transform:scale(1.18) rotate(-8deg)} 65%{transform:scale(.94) rotate(5deg)} }
+        @media(max-width:900px) {
+            .food-header-main { flex-wrap:nowrap; }
+            .food-search { order:initial; flex:0 1 320px; max-width:320px; }
+            .food-logo { min-width:0; }
+            .food-nav { gap:20px; }
+            .satvik-footer-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        }
+        @media(max-width:600px) {
+            .food-header-main { min-height:58px; padding:8px 12px; gap:9px; }
+            .food-logo .logo-icon { width:38px; height:36px; }
+            .food-logo .logo-text strong { font-size:15px; }
+            .food-logo .logo-text small { font-size:7px; letter-spacing:.4px; }
+            .food-search { flex:1 1 auto; max-width:none; min-width:80px; }
+            .food-search input { height:36px; padding:0 30px 0 10px; font-size:10px; }
+            .food-search .search-icon { right:9px; font-size:18px; }
+            .food-actions { gap:0; }
+            .food-cart-button { width:36px; height:36px; }
+            .food-nav { min-height:35px; padding:0 12px; gap:18px; }
+            .food-nav a { font-size:10px; padding:10px 0 8px; }
+            .satvik-footer { padding:32px 16px 16px; }
+            .satvik-footer-grid { gap:22px 16px; }
+            .satvik-footer h3 { font-size:18px; }
+            .satvik-footer h4 { font-size:12px; }
+            .satvik-footer p, .satvik-footer li { font-size:11px; }
+            .footer-legal { margin-top:18px; }
+            .footer-legal-links { gap:10px; font-size:10px; }
+        }
+
+
+        /* Single-row compact navbar */
+        .food-header { display:block !important; }
+        .single-navbar {
+            width:100%; max-width:1500px; min-height:68px; margin:0 auto;
+            display:flex; flex-flow:row nowrap; align-items:center; gap:clamp(10px,1.4vw,22px);
+            padding:8px clamp(12px,2vw,26px); overflow:visible;
+        }
+        .single-navbar .food-logo { flex:0 0 auto; min-width:0; gap:8px; }
+        .single-navbar .food-logo .logo-icon { width:45px; height:42px; }
+        .single-navbar .food-logo .logo-text strong { font-size:18px; white-space:nowrap; }
+        .single-navbar .food-logo .logo-text small { font-size:8px; letter-spacing:.6px; white-space:nowrap; }
+        .single-navbar .food-nav {
+            flex:1 1 auto; min-width:0; max-width:none; min-height:0; margin:0; padding:0;
+            display:flex; flex-flow:row nowrap; align-items:center; justify-content:center; gap:clamp(10px,1.25vw,20px);
+            overflow:visible; white-space:nowrap;
+        }
+        .single-navbar .food-nav a { flex:0 0 auto; padding:10px 0; font-size:clamp(10px,.85vw,12px); }
+        .single-navbar .food-nav a::after { bottom:3px; }
+        .single-navbar .nav-pill { font-size:8px; }
+        .single-navbar .food-search { flex:0 1 220px; width:220px; max-width:220px; min-width:125px; }
+        .single-navbar .food-search input { height:38px; padding:0 34px 0 12px; font-size:11px; border-radius:10px; }
+        .single-navbar .food-search .search-icon { right:10px; font-size:20px; }
+        .single-navbar .food-actions { flex:0 0 auto; margin:0; gap:0; }
+        .single-navbar .food-cart-button { width:39px; height:39px; }
+        @media (max-width:1100px) {
+            .single-navbar { gap:10px; padding-left:12px; padding-right:12px; }
+            .single-navbar .food-logo .logo-icon { width:38px; height:36px; }
+            .single-navbar .food-logo .logo-text strong { font-size:15px; }
+            .single-navbar .food-logo .logo-text small { display:none; }
+            .single-navbar .food-nav { gap:10px; }
+            .single-navbar .food-nav a { font-size:10px; }
+            .single-navbar .food-search { flex-basis:150px; width:150px; min-width:105px; }
+        }
+        @media (max-width:760px) {
+            .single-navbar { min-height:58px; gap:9px; padding:7px 10px; }
+            .single-navbar .food-nav { justify-content:flex-start; overflow-x:auto; scrollbar-width:none; gap:14px; }
+            .single-navbar .food-nav::-webkit-scrollbar { display:none; }
+            .single-navbar .food-nav a { font-size:10px; }
+            .single-navbar .food-search { flex:0 1 125px; width:125px; min-width:90px; }
+            .single-navbar .food-search input { height:34px; font-size:10px; }
+            .single-navbar .food-cart-button { width:34px; height:34px; }
+        }
+        @media (max-width:480px) {
+            .single-navbar { gap:7px; padding:7px 8px; }
+            .single-navbar .food-logo .logo-icon { width:31px; height:30px; }
+            .single-navbar .food-logo .logo-text strong { font-size:12px; }
+            .single-navbar .food-nav { gap:12px; }
+            .single-navbar .food-nav a { font-size:9px; }
+            .single-navbar .food-search { flex:0 1 92px; width:92px; min-width:75px; }
+            .single-navbar .food-search input { padding-left:7px; padding-right:24px; font-size:9px; }
+            .single-navbar .food-search input::placeholder { color:transparent; }
+            .single-navbar .food-search .search-icon { right:6px; font-size:17px; }
+            .single-navbar .food-cart-button { width:31px; height:31px; font-size:16px; }
+        }
     </style>
 </head>
 
@@ -2366,61 +2572,36 @@
          HEADER
     ========================================================== -->
 
-    <header class="header">
-
-        <div class="header-inner">
-
-            <a href="#" class="logo">
-
-                <div class="logo-icon">
-                    <img src="{{ asset('img/logo.png') }}" alt="Sathvik Foods Logo">
-                </div>
-
+    <header class="header food-header">
+        <div class="header-inner food-header-main single-navbar">
+            <a href="#" class="logo food-logo" aria-label="Satvik Foods home">
+                <div class="logo-icon"><img src="{{ asset('img/logo.png') }}" alt="Satvik Foods Logo"></div>
                 <div class="logo-text">
-
                     <strong>Satvik Foods</strong>
-
-                    <small>
-                        Pure • Natural • Healthy
-                    </small>
-
+                    <small>Pure • Natural • Healthy</small>
                 </div>
-
             </a>
 
+            <nav class="main-nav food-nav" aria-label="Main navigation">
+                <a class="nav-home" href="#">Home</a>
+                <a href="#products">Shop All</a>
+                <a href="#combo-offers">Combo Offers <span class="nav-pill">SAVE</span></a>
+                <a href="#special-offers">Special Offers</a>
+                <a href="#contact-us">Contact Us</a>
+            </nav>
 
-            <div class="search-box">
-
-                <input type="text" ng-model="searchText" placeholder="Search for honey, rice, spices...">
-
-                <span class="search-icon">
-                    🔍
-                </span>
-
+            <div class="search-box food-search">
+                <input type="text" ng-model="searchText" placeholder="Search foods..." aria-label="Search products">
+                <span class="search-icon" aria-hidden="true">⌕</span>
             </div>
 
-
-            <div class="header-actions">
-
-                <button class="icon-button" type="button" title="Wishlist">
-                    ♡
+            <div class="header-actions food-actions">
+                <button class="icon-button food-cart-button" type="button" ng-click="openCart()" title="Shopping Bag" aria-label="Open shopping bag">
+                    <span aria-hidden="true">🛍</span>
+                    <span class="cart-badge" ng-if="getCartCount() > 0">@{{ getCartCount() }}</span>
                 </button>
-
-
-                <button class="icon-button" type="button" ng-click="openCart()" title="Shopping Bag">
-
-                    🛍️
-
-                    <span class="cart-badge" ng-if="getCartCount() > 0">
-                        @{{ getCartCount() }}
-                    </span>
-
-                </button>
-
             </div>
-
         </div>
-
     </header>
 
 
@@ -2511,6 +2692,7 @@
     ========================================================== -->
 
     <main id="products">
+        <span id="combo-offers" class="anchor-target" aria-hidden="true"></span>
 
         <section class="section">
 
@@ -2531,32 +2713,33 @@
             </div>
 
 
-            <!-- CATEGORIES -->
-
-            <div class="categories">
-
-                <button type="button" class="category-button" ng-class="{active: selectedCategory === 'All'}"
-                    ng-click="openCategory('All')">
-                    All Products
-                </button>
-
-
-                <button type="button" class="category-button" ng-repeat="category in categories"
-                    ng-class="{active: selectedCategory === category}" ng-click="openCategory(category)">
-                    @{{ category }}
-                </button>
-
+            <!-- FOOD CATEGORY NAVIGATION -->
+            <div class="category-heading-row">
+                <div>
+                    <span class="eyebrow-label">FIND YOUR FAVOURITES</span>
+                    <h3>Shop by category</h3>
+                    <p>Everyday essentials, made with care.</p>
+                </div>
+                <span class="category-scroll-hint">Swipe to explore →</span>
             </div>
-
-
-            <br>
+            <div class="categories food-categories" role="group" aria-label="Filter products by category">
+                <button type="button" class="category-button food-category-card all-category" ng-class="{active: selectedCategory === 'All'}" ng-click="openCategory('All')">
+                    <span class="category-icon">✦</span><span class="category-label">All Foods</span><span class="category-subtitle">Browse everything</span>
+                </button>
+                <button type="button" class="category-button food-category-card" ng-repeat="category in categories" ng-class="{active: selectedCategory === category}" ng-click="openCategory(category)">
+                    <span class="category-icon" ng-switch="category">
+                        <span ng-switch-when="Health Drinks">🥛</span><span ng-switch-when="Batter">🥞</span><span ng-switch-when="Health Mixes">🌾</span><span ng-switch-when="Podi & Premix">🌶️</span><span ng-switch-when="Thokku & Chutney">🥫</span><span ng-switch-when="Idli Podi">🍚</span><span ng-switch-default>🌿</span>
+                    </span>
+                    <span class="category-label">@{{ category }}</span><span class="category-subtitle">Explore range</span>
+                </button>
+            </div>
 
 
             <!-- PRODUCT GRID -->
 
             <div class="products-grid">
 
-                <article class="product-card"
+                <article class="product-card" data-product-id="@{{ product.id }}"
                     ng-repeat="
             product in products |
             filter:searchFilter |
@@ -2586,44 +2769,39 @@
                     </div>
 
 
-                    <!-- PRODUCT DETAILS -->
-                    <div class="product-content">
+                    <!-- PRODUCT DETAILS: variant, quantity and full-width add button -->
+                    <div class="product-content" ng-init="product._cardQty = product._cardQty || 1; product._selectedVariant = product._selectedVariant || (product.variants && product.variants.length ? product.variants[0] : null)">
 
-                        <div class="rating">
-                            <span>★</span>
-                            @{{ product.rating }}
-                        </div>
-
-                        <div class="product-name">
+                        <div class="product-name" title="@{{ product.name }}">
                             @{{ product.name }}
                         </div>
 
-                        <div class="product-weight">
-                            @{{ product.weight }}
+                        <div class="product-price-line">
+                            <span class="price-current">₹@{{ product._selectedVariant ? product._selectedVariant.price : product.price | number:2 }}</span>
+                            <span class="old-price" ng-if="product.oldPrice">₹@{{ product.oldPrice | number:2 }}</span>
                         </div>
 
-                        <div class="product-bottom">
-
-                            <div class="price">
-
-                                <strong>
-                                    ₹@{{ product.price }}
-                                </strong>
-
-                                <span class="old-price" ng-if="product.oldPrice">
-                                    ₹@{{ product.oldPrice }}
-                                </span>
-
-                            </div>
-
-
-                            <button class="add-button" type="button"
-                                ng-click="$event.stopPropagation(); addToCart(product)">
-                                + Add to Bag
-                            </button>
-
+                        <select class="product-variant-select"
+                            ng-if="product.variants && product.variants.length"
+                            ng-model="product._selectedVariant"
+                            ng-options="variant as ('Weight - ' + variant.weight + '  |  ₹' + variant.price) for variant in product.variants track by variant.weight"
+                            ng-click="$event.stopPropagation()"
+                            aria-label="Choose product weight">
+                        </select>
+                        <div class="product-variant-select" ng-if="!product.variants || !product.variants.length" style="display:flex;align-items:center;">
+                            Weight - @{{ product.weight || 'Standard pack' }}
                         </div>
 
+                        <div class="product-card-quantity" ng-click="$event.stopPropagation()">
+                            <button type="button" aria-label="Decrease quantity" ng-click="product._cardQty = product._cardQty > 1 ? product._cardQty - 1 : 1">−</button>
+                            <span>@{{ product._cardQty }}</span>
+                            <button type="button" aria-label="Increase quantity" ng-click="product._cardQty = (product._cardQty || 1) + 1">+</button>
+                        </div>
+
+                        <button class="add-button" type="button"
+                            ng-click="$event.stopPropagation(); addToCart(product, product._selectedVariant, product._cardQty)">
+                            Add to Cart
+                        </button>
                     </div>
 
                 </article>
@@ -2662,7 +2840,7 @@
          DEAL
     ========================================================== -->
 
-    <section class="deal">
+    <section class="deal" id="special-offers">
 
         <div class="deal-inner">
 
@@ -2730,68 +2908,65 @@
          FOOTER
     ========================================================== -->
 
-    <footer>
-
-        <div class="footer-inner">
-
-            <div>
-
-                <h3>
-                    🌿 Satvik Foods
-                </h3>
-
-                <p>
-                    Bringing natural, wholesome and carefully selected
-                    foods to your everyday table.
-                </p>
-
+    <footer id="contact-us" class="satvik-footer">
+        <div class="footer-inner satvik-footer-grid">
+            <div class="footer-brand">
+                <h3>🌿 Satvik Foods</h3>
+                <p>Bringing natural, wholesome and carefully selected foods to your everyday table.</p>
+                <p class="footer-trust">✓ Carefully selected foods<br>✓ Easy online ordering<br>✓ Delivery to your doorstep</p>
             </div>
 
-
             <div>
-
-                <h4>
-                    Shop
-                </h4>
-
+                <h4>Shop</h4>
                 <ul>
-
-                    <li>Organic Foods</li>
-                    <li>Natural Products</li>
-                    <li>Rice & Grains</li>
-                    <li>Spices</li>
-
+                    <li><a href="#products">Shop All Products</a></li>
+                    <li><a href="#combo-offers">Combo Offers</a></li>
+                    <li><a href="#special-offers">Special Offers</a></li>
+                    <li><a href="#products">Browse Categories</a></li>
                 </ul>
-
             </div>
-
 
             <div>
-
-                <h4>
-                    Contact
-                </h4>
-
+                <h4>Customer Care</h4>
                 <ul>
-
-                    <li>📞 +91 7200095988</li>
-                    <li>✉️ satvikfoods@gmail.com</li>
-                    <li>📍 Velechery,Tamil Nadu, India</li>
-
+                    <li><a href="#contact-us">Contact Us</a></li>
+                    <li><a href="#shipping-policy">Shipping & Delivery</a></li>
+                    <li><a href="#returns-policy">Returns & Refunds</a></li>
+                    <li><a href="#faq">Frequently Asked Questions</a></li>
                 </ul>
-
             </div>
 
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li>📞 <a href="tel:+917200095988">+91 7200095988</a></li>
+                    <li>✉️ <a href="mailto:satvikfoods@gmail.com">satvikfoods@gmail.com</a></li>
+                    <li>📍 Velachery, Chennai, Tamil Nadu</li>
+                </ul>
+            </div>
         </div>
 
+        <div class="footer-legal" id="privacy-policy">
+            <h4>Privacy Policy</h4>
+            <p>Satvik Foods uses the details you provide, such as your name, phone number and delivery address, to process orders and coordinate delivery. Please provide accurate information. Order details are used for order management and customer support; do not submit sensitive personal information that is not required to place an order.</p>
+        </div>
+        <div class="footer-legal" id="shipping-policy">
+            <h4>Shipping & Delivery</h4>
+            <p>Delivery availability and charges are shown during checkout. Delivery timelines may vary by location and order volume. Contact customer care for help with a delayed order.</p>
+        </div>
+        <div class="footer-legal" id="returns-policy">
+            <h4>Returns & Refunds</h4>
+            <p>If an item arrives damaged, incorrect or missing, contact Satvik Foods customer care with your order details so the issue can be reviewed. Refund or replacement eligibility should be confirmed by customer care.</p>
+        </div>
+        <div class="footer-legal" id="faq">
+            <h4>Frequently Asked Questions</h4>
+            <p>For questions about products, ingredients, order status, delivery charges or payments, contact us using the phone number or email above.</p>
+        </div>
 
         <div class="copyright">
-
-            © {{ date('Y') }} Satvik Foods.
-            All rights reserved.
-
+            <div class="footer-legal-links"><a href="#privacy-policy">Privacy Policy</a><a href="#shipping-policy">Shipping & Delivery</a><a href="#returns-policy">Returns & Refunds</a><a href="#contact-us">Contact Us</a></div>
+            © {{ date('Y') }} Satvik Foods. All rights reserved.
         </div>
-
     </footer>
 
 
@@ -3233,8 +3408,8 @@
 
     <script>
         /* =========================================================
-                                                                   ANGULAR MODULE
-                                                                ========================================================== */
+                                                                       ANGULAR MODULE
+                                                                    ========================================================== */
 
         var app = angular.module(
             'SatvikApp',
@@ -3463,8 +3638,45 @@
                    ADD TO CART
                 ================================================= */
 
+                function animateProductToCart(product) {
+                    try {
+                        var card = document.querySelector('.product-card[data-product-id="' + String(product.id).replace(/"/g, '\\"') + '"]');
+                        var source = card ? card.querySelector('.product-photo') : null;
+                        var target = document.querySelector('.food-cart-button');
+                        if (!source || !target) return;
+                        var from = source.getBoundingClientRect();
+                        var to = target.getBoundingClientRect();
+                        if (!from.width || !from.height) return;
+                        var flyer = source.cloneNode(true);
+                        flyer.className = 'cart-fly-image';
+                        flyer.style.left = from.left + 'px';
+                        flyer.style.top = from.top + 'px';
+                        flyer.style.width = from.width + 'px';
+                        flyer.style.height = from.height + 'px';
+                        document.body.appendChild(flyer);
+                        flyer.getBoundingClientRect();
+                        requestAnimationFrame(function() {
+                            flyer.style.left = (to.left + to.width / 2 - 10) + 'px';
+                            flyer.style.top = (to.top + to.height / 2 - 10) + 'px';
+                            flyer.style.width = '20px';
+                            flyer.style.height = '20px';
+                            flyer.style.opacity = '.25';
+                            flyer.style.transform = 'rotate(18deg) scale(.65)';
+                        });
+                        window.setTimeout(function() {
+                            if (flyer.parentNode) flyer.parentNode.removeChild(flyer);
+                            target.classList.remove('cart-bounce');
+                            void target.offsetWidth;
+                            target.classList.add('cart-bounce');
+                        }, 680);
+                    } catch (e) { /* Cart action should still work if animation is unavailable. */ }
+                }
+
                 $scope.addToCart =
-                    function(product, variant) {
+                    function(product, variant, quantity) {
+
+                        animateProductToCart(product);
+                        var addQuantity = Math.max(1, parseInt(quantity, 10) || 1);
 
                         if (!variant && product.variants && product.variants.length) {
                             variant = product.variants[0];
@@ -3485,7 +3697,7 @@
                         });
 
                         if (existing) {
-                            existing.quantity++;
+                            existing.quantity += addQuantity;
                         } else {
                             $scope.cart.push({
                                 id: cartId,
@@ -3494,7 +3706,7 @@
                                 weight: variantWeight,
                                 price: variantPrice,
                                 image: product.image,
-                                quantity: 1
+                                quantity: addQuantity
                             });
                         }
 
@@ -4209,6 +4421,8 @@
     </script>
 
 
+
 </body>
+
 
 </html>

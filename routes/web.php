@@ -11,6 +11,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/shop-all', 'shop-all')->name('shop.all');
+
+Route::view('/combo-offers', 'combo-offers')
+    ->name('combo.offers');
+
 Route::post(
     '/orders',
     [OrderController::class, 'store']
