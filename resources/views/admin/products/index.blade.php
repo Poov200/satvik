@@ -1344,99 +1344,42 @@
 
         <nav class="side-nav">
 
-
-            <div class="nav-title">
-                Main
-            </div>
-
+            <div class="nav-title">Main</div>
 
             <a href="{{ route('admin.orders') }}" class="nav-link">
-
-                <span class="nav-icon">
-                    📊
-                </span>
-
-                <span>
-                    Dashboard
-                </span>
-
+                <span class="nav-icon">📊</span>
+                Dashboard
             </a>
 
-
-            <div class="nav-title">
-                Store
-            </div>
-
+            <div class="nav-title">Store</div>
 
             <a href="{{ route('admin.orders') }}" class="nav-link">
-
-                <span class="nav-icon">
-                    🛒
-                </span>
-
-                <span>
-                    Orders
-                </span>
-
+                <span class="nav-icon">🛒</span>
+                Orders
             </a>
 
-
-            <a href="{{ route('admin.products') }}" class="nav-link active">
-
-                <span class="nav-icon">
-                    📦
-                </span>
-
-                <span>
-                    Products
-                </span>
-
+            <a href="{{ route('admin.products') }}" class="nav-link">
+                <span class="nav-icon">📦</span>
+                Products
             </a>
 
+            <a href="{{ route('admin.offers.index', ['type' => 'combo']) }}"
+                class="nav-link {{ request()->routeIs('admin.offers.*') ? 'active' : '' }}">
+                <span class="nav-icon">🎁</span>
+                Offers
+            </a>
+
+            <div class="nav-title">Management</div>
 
             <a href="#" class="nav-link">
-
-                <span class="nav-icon">
-                    🏷️
-                </span>
-
-                <span>
-                    Categories
-                </span>
-
+                <span class="nav-icon">👥</span>
+                Customers
             </a>
-
-
-            <div class="nav-title">
-                Management
-            </div>
-
 
             <a href="#" class="nav-link">
-
-                <span class="nav-icon">
-                    👥
-                </span>
-
-                <span>
-                    Customers
-                </span>
-
+                <span class="nav-icon">📈</span>
+                Reports
             </a>
-
-
-            <a href="#" class="nav-link">
-
-                <span class="nav-icon">
-                    📈
-                </span>
-
-                <span>
-                    Reports
-                </span>
-
-            </a>
-
 
         </nav>
 
@@ -1997,8 +1940,8 @@
 
     <script>
         /* =========================================================
-               MOBILE SIDEBAR
-            ========================================================= */
+                       MOBILE SIDEBAR
+                    ========================================================= */
 
         document
             .getElementById('menuToggle')
