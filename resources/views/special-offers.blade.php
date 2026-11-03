@@ -4436,8 +4436,8 @@
                 <a href="{{ url('/shop-all') }}">Shop All</a>
                 <a class="nav-home" href="{{ url('/special-offers') }}">Special Offers <span
                         class="nav-pill">SAVE</span></a>
-                <a href="{{ url('/special-offers') }}">Special Offers</a>
-                <a href="{{ url('/#contact-us') }}">Contact Us</a>
+                <a href="{{ url('/special.offers') }}">Special Offers</a>
+                <a href="{{ url('/contact') }}">Contact Us</a>
             </nav>
             <div class="search-box food-search"><input type="text" ng-model="searchText"
                     placeholder="Search foods..." aria-label="Search products"><span class="search-icon"
