@@ -60,321 +60,320 @@
    SIDEBAR
 ========================================================= */
 
-:root {
-    --side: #0b1b13;
-    --side-hover: #14291f;
-    --side-active: #183c29;
-    --accent: #38b978;
-    --text-light: #dce8e1;
-    --text-muted: #8da197;
-}
+        :root {
+            --side: #0b1b13;
+            --side-hover: #14291f;
+            --side-active: #183c29;
+            --accent: #38b978;
+            --text-light: #dce8e1;
+            --text-muted: #8da197;
+        }
 
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
 
-    width: 250px;
-    height: 100vh;
+            width: 250px;
+            height: 100vh;
 
-    background: var(--side);
-    color: var(--text-light);
+            background: var(--side);
+            color: var(--text-light);
 
-    display: flex;
-    flex-direction: column;
+            display: flex;
+            flex-direction: column;
 
-    z-index: 1000;
+            z-index: 1000;
 
-    overflow-y: auto;
-    overflow-x: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
 
-    border-right: 1px solid rgba(255,255,255,.06);
-}
+            border-right: 1px solid rgba(255, 255, 255, .06);
+        }
 
-/* =========================================================
+        /* =========================================================
    BRAND
 ========================================================= */
 
-.brand {
-    padding: 22px 20px;
+        .brand {
+            padding: 22px 20px;
 
-    display: flex;
-    align-items: center;
+            display: flex;
+            align-items: center;
 
-    gap: 12px;
+            gap: 12px;
 
-    border-bottom: 1px solid rgba(255,255,255,.06);
-}
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
 
-.brand-icon {
-    width: 42px;
-    height: 42px;
+        .brand-icon {
+            width: 42px;
+            height: 42px;
 
-    border-radius: 12px;
+            border-radius: 12px;
 
-    background: linear-gradient(
-        135deg,
-        #2fa36b,
-        #174b31
-    );
+            background: linear-gradient(135deg,
+                    #2fa36b,
+                    #174b31);
 
-    display: grid;
-    place-items: center;
+            display: grid;
+            place-items: center;
 
-    color: #fff;
+            color: #fff;
 
-    font-size: 20px;
-    font-weight: 800;
+            font-size: 20px;
+            font-weight: 800;
 
-    flex-shrink: 0;
-}
+            flex-shrink: 0;
+        }
 
-.brand-text {
-    display: flex;
-    flex-direction: column;
-}
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-.brand-text strong {
-    color: #fff;
+        .brand-text strong {
+            color: #fff;
 
-    font-size: 16px;
-    font-weight: 800;
+            font-size: 16px;
+            font-weight: 800;
 
-    line-height: 1.2;
-}
+            line-height: 1.2;
+        }
 
-.brand-text span {
-    margin-top: 4px;
+        .brand-text span {
+            margin-top: 4px;
 
-    color: #7f9489;
+            color: #7f9489;
 
-    font-size: 10px;
-    font-weight: 600;
+            font-size: 10px;
+            font-weight: 600;
 
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-/* =========================================================
+        /* =========================================================
    NAVIGATION
 ========================================================= */
 
-.side-nav {
-    padding: 16px 12px 20px;
+        .side-nav {
+            padding: 16px 12px 20px;
 
-    flex: 1;
+            flex: 1;
 
-    overflow-y: auto;
-}
+            overflow-y: auto;
+        }
 
-.nav-title {
-    padding: 14px 12px 8px;
+        .nav-title {
+            padding: 14px 12px 8px;
 
-    color: #5f7669;
+            color: #5f7669;
 
-    font-size: 10px;
-    font-weight: 700;
+            font-size: 10px;
+            font-weight: 700;
 
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-}
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
 
-.nav-link {
-    display: flex;
-    align-items: center;
+        .nav-link {
+            display: flex;
+            align-items: center;
 
-    gap: 12px;
+            gap: 12px;
 
-    padding: 11px 14px;
+            padding: 11px 14px;
 
-    margin-bottom: 3px;
+            margin-bottom: 3px;
 
-    border-radius: 10px;
+            border-radius: 10px;
 
-    color: #aebfb5;
+            color: #aebfb5;
 
-    text-decoration: none;
+            text-decoration: none;
 
-    font-size: 13.5px;
-    font-weight: 600;
+            font-size: 13.5px;
+            font-weight: 600;
 
-    transition: all .2s ease;
-}
+            transition: all .2s ease;
+        }
 
-.nav-icon {
-    width: 22px;
+        .nav-icon {
+            width: 22px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    font-size: 17px;
+            font-size: 17px;
 
-    flex-shrink: 0;
-}
+            flex-shrink: 0;
+        }
 
-.nav-link:hover {
-    background: var(--side-hover);
+        .nav-link:hover {
+            background: var(--side-hover);
 
-    color: #fff;
+            color: #fff;
 
-    text-decoration: none;
-}
+            text-decoration: none;
+        }
 
-.nav-link.active {
-    background: var(--side-active);
+        .nav-link.active {
+            background: var(--side-active);
 
-    color: var(--accent);
+            color: var(--accent);
 
-    box-shadow: inset 3px 0 0 var(--accent);
-}
+            box-shadow: inset 3px 0 0 var(--accent);
+        }
 
-.nav-link.active .nav-icon {
-    color: var(--accent);
-}
+        .nav-link.active .nav-icon {
+            color: var(--accent);
+        }
 
-/* =========================================================
+        /* =========================================================
    FOOTER / ADMIN
 ========================================================= */
 
-.side-footer {
-    padding: 16px;
+        .side-footer {
+            padding: 16px;
 
-    border-top: 1px solid rgba(255,255,255,.06);
+            border-top: 1px solid rgba(255, 255, 255, .06);
 
-    background: var(--side);
+            background: var(--side);
 
-    flex-shrink: 0;
-}
+            flex-shrink: 0;
+        }
 
-.admin-user {
-    display: flex;
-    align-items: center;
+        .admin-user {
+            display: flex;
+            align-items: center;
 
-    gap: 10px;
+            gap: 10px;
 
-    margin-bottom: 14px;
-}
+            margin-bottom: 14px;
+        }
 
-.admin-avatar {
-    width: 38px;
-    height: 38px;
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
 
-    border-radius: 50%;
+            border-radius: 50%;
 
-    background: #183c29;
+            background: #183c29;
 
-    color: #5dd396;
+            color: #5dd396;
 
-    display: grid;
-    place-items: center;
+            display: grid;
+            place-items: center;
 
-    font-size: 15px;
-    font-weight: 800;
+            font-size: 15px;
+            font-weight: 800;
 
-    flex-shrink: 0;
-}
+            flex-shrink: 0;
+        }
 
-.admin-info {
-    min-width: 0;
+        .admin-info {
+            min-width: 0;
 
-    display: flex;
-    flex-direction: column;
-}
+            display: flex;
+            flex-direction: column;
+        }
 
-.admin-info strong {
-    color: #fff;
+        .admin-info strong {
+            color: #fff;
 
-    font-size: 13px;
-    font-weight: 700;
-}
+            font-size: 13px;
+            font-weight: 700;
+        }
 
-.admin-info span {
-    margin-top: 3px;
+        .admin-info span {
+            margin-top: 3px;
 
-    color: #8da197;
+            color: #8da197;
 
-    font-size: 11px;
+            font-size: 11px;
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-/* =========================================================
+        /* =========================================================
    LOGOUT
 ========================================================= */
 
-.logout-btn {
-    width: 100%;
+        .logout-btn {
+            width: 100%;
 
-    padding: 11px 14px;
+            padding: 11px 14px;
 
-    border-radius: 10px;
+            border-radius: 10px;
 
-    border: 1px solid rgba(255,255,255,.12);
+            border: 1px solid rgba(255, 255, 255, .12);
 
-    background: rgba(255,255,255,.06);
+            background: rgba(255, 255, 255, .06);
 
-    color: #e7efea;
+            color: #e7efea;
 
-    font-family: inherit;
+            font-family: inherit;
 
-    font-size: 13px;
-    font-weight: 700;
+            font-size: 13px;
+            font-weight: 700;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    transition: all .2s ease;
-}
+            transition: all .2s ease;
+        }
 
-.logout-btn:hover {
-    background: #b91c1c;
+        .logout-btn:hover {
+            background: #b91c1c;
 
-    border-color: #b91c1c;
+            border-color: #b91c1c;
 
-    color: #fff;
-}
+            color: #fff;
+        }
 
-/* =========================================================
+        /* =========================================================
    MAIN CONTENT
 ========================================================= */
 
-.main {
-    margin-left: 250px;
+        .main {
+            margin-left: 250px;
 
-    min-height: 100vh;
-}
+            min-height: 100vh;
+        }
 
-/* =========================================================
+        /* =========================================================
    MOBILE
 ========================================================= */
 
-.menu-toggle {
-    display: none;
-}
+        .menu-toggle {
+            display: none;
+        }
 
-@media (max-width: 1024px) {
+        @media (max-width: 1024px) {
 
-    .sidebar {
-        transform: translateX(-100%);
+            .sidebar {
+                transform: translateX(-100%);
 
-        transition: transform .3s ease;
-    }
+                transition: transform .3s ease;
+            }
 
-    .sidebar.open {
-        transform: translateX(0);
-    }
+            .sidebar.open {
+                transform: translateX(0);
+            }
 
-    .main {
-        margin-left: 0;
-    }
+            .main {
+                margin-left: 0;
+            }
 
-    .menu-toggle {
-        display: block;
-    }
-}
+            .menu-toggle {
+                display: block;
+            }
+        }
+
         /* =========================================================
            MAIN
         ========================================================= */
@@ -1171,149 +1170,102 @@
      SIDEBAR
 ========================================================= -->
 
-<aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar">
 
-    <div class="brand">
+        <div class="brand">
 
-        <div class="brand-icon">
-            S
-        </div>
-
-        <div class="brand-text">
-            <strong>
-                Satvik Foods
-            </strong>
-
-            <span>
-                Admin Panel
-            </span>
-        </div>
-
-    </div>
-
-    <nav class="side-nav">
-
-        <div class="nav-title">
-            Main
-        </div>
-
-        <a href="{{ route('admin.orders') }}" class="nav-link">
-            <span class="nav-icon">
-                📊
-            </span>
-
-            <span>
-                Dashboard
-            </span>
-        </a>
-
-        <div class="nav-title">
-            Store
-        </div>
-
-        <!-- ORDERS ACTIVE -->
-        <a href="{{ route('admin.orders') }}" class="nav-link active">
-
-            <span class="nav-icon">
-                🛒
-            </span>
-
-            <span>
-                Orders
-            </span>
-
-        </a>
-
-        <!-- PRODUCTS -->
-        <a href="{{ route('admin.products') }}" class="nav-link">
-
-            <span class="nav-icon">
-                📦
-            </span>
-
-            <span>
-                Products
-            </span>
-
-        </a>
-
-        <a href="#" class="nav-link">
-
-            <span class="nav-icon">
-                🏷️
-            </span>
-
-            <span>
-                Categories
-            </span>
-
-        </a>
-
-        <div class="nav-title">
-            Management
-        </div>
-
-        <a href="#" class="nav-link">
-
-            <span class="nav-icon">
-                👥
-            </span>
-
-            <span>
-                Customers
-            </span>
-
-        </a>
-
-        <a href="#" class="nav-link">
-
-            <span class="nav-icon">
-                📈
-            </span>
-
-            <span>
-                Reports
-            </span>
-
-        </a>
-
-    </nav>
-
-    <div class="side-footer">
-
-        <div class="admin-user">
-
-            <div class="admin-avatar">
-                A
+            <div class="brand-icon">
+                S
             </div>
 
-            <div class="admin-info">
-
+            <div class="brand-text">
                 <strong>
-                    Administrator
+                    Satvik Foods
                 </strong>
 
                 <span>
-                    {{ session('admin_email') }}
+                    Admin Panel
                 </span>
-
             </div>
 
         </div>
 
-        <form method="POST" action="{{ route('admin.logout') }}">
+        <nav class="side-nav">
 
-            @csrf
+            <div class="nav-title">Main</div>
 
-            <button type="submit" class="logout-btn">
-                ↪ &nbsp; Logout
-            </button>
+            <a href="{{ route('admin.orders') }}" class="nav-link">
+                <span class="nav-icon">📊</span>
+                Dashboard
+            </a>
 
-        </form>
+            <div class="nav-title">Store</div>
 
-    </div>
+            <a href="{{ route('admin.orders') }}" class="nav-link">
+                <span class="nav-icon">🛒</span>
+                Orders
+            </a>
 
-</aside>
+            <a href="{{ route('admin.products') }}" class="nav-link">
+                <span class="nav-icon">📦</span>
+                Products
+            </a>
+
+            <a href="{{ route('admin.offers.index', ['type' => 'combo']) }}"
+                class="nav-link {{ request()->routeIs('admin.offers.*') ? 'active' : '' }}">
+                <span class="nav-icon">🎁</span>
+                Offers
+            </a>
+
+            <div class="nav-title">Management</div>
+
+            <a href="#" class="nav-link">
+                <span class="nav-icon">👥</span>
+                Customers
+            </a>
+
+            <a href="#" class="nav-link">
+                <span class="nav-icon">📈</span>
+                Reports
+            </a>
+
+        </nav>
+
+        <div class="side-footer">
+
+            <div class="admin-user">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div class="admin-info">
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <span>
+                        {{ session('admin_email') }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <form method="POST" action="{{ route('admin.logout') }}">
+
+                @csrf
+
+                <button type="submit" class="logout-btn">
+                    ↪ &nbsp; Logout
+                </button>
+
+            </form>
+
+        </div>
+
+    </aside>
 
 
     <!-- =========================================================
@@ -1916,8 +1868,8 @@
 
     <script>
         /* =============================================================
-       GLOBAL
-    ============================================================= */
+               GLOBAL
+            ============================================================= */
 
         const csrfToken =
             document

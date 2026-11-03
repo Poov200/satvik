@@ -5,16 +5,25 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OfferApiController;
 
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::view('/shop-all', 'shop-all')->name('shop.all');
 
 Route::view('/combo-offers', 'combo-offers')
     ->name('combo.offers');
+
+Route::get('/special-offers', [OfferApiController::class, 'specialPage'])
+    ->name('special.offers');
 
 Route::post(
     '/orders',
@@ -146,3 +155,59 @@ Route::middleware('admin')
         )->name('admin.products.delete');
 
     });
+
+
+    /*
+|--------------------------------------------------------------------------
+| Customer-facing Offer Pages and API
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/combo-offers', [OfferApiController::class, 'comboPage'])
+    ->name('combo.offers');
+
+Route::get('/special-offers', [OfferApiController::class, 'specialPage'])
+    ->name('special.offers');
+
+Route::get('/api/offers/{type}', [OfferApiController::class, 'index'])
+    ->whereIn('type', ['combo', 'special'])
+    ->name('offers.api');
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin Offer Management
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('admin')
+    ->name('admin.')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::get('/offers/{type}', [OfferController::class, 'index'])
+            ->whereIn('type', ['combo', 'special'])
+            ->name('offers.index');
+
+        Route::get('/offers/{type}/create', [OfferController::class, 'create'])
+            ->whereIn('type', ['combo', 'special'])
+            ->name('offers.create');
+
+        Route::post('/offers/{type}', [OfferController::class, 'store'])
+            ->whereIn('type', ['combo', 'special'])
+            ->name('offers.store');
+
+        Route::get('/offers/{type}/{offer}/edit', [OfferController::class, 'edit'])
+            ->whereIn('type', ['combo', 'special'])
+            ->name('offers.edit');
+
+        Route::put('/offers/{type}/{offer}', [OfferController::class, 'update'])
+            ->whereIn('type', ['combo', 'special'])
+            ->name('offers.update');
+
+        Route::delete('/offers/{type}/{offer}', [OfferController::class, 'destroy'])
+            ->whereIn('type', ['combo', 'special'])
+            ->name('offers.destroy');
+    });
+
+
